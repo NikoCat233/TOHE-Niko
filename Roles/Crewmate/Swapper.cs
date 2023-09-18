@@ -25,7 +25,7 @@ public static class Swapper
     public static Dictionary<byte, int> Swappermax = new();
     public static void SetupCustomOption()
     {
-        Options.SetupRoleOptions(Id, TabGroup.OtherRoles, CustomRoles.Swapper);
+        Options.SetupRoleOptions(Id, TabGroup.OtherRoles, CustomRoles.Swapper, canPublic: true);
         SwapMax = IntegerOptionItem.Create(Id + 3, "SwapperMax", new(1, 999, 1), 10, TabGroup.OtherRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Swapper])
             .SetValueFormat(OptionFormat.Times);
         CanStartMeeting = BooleanOptionItem.Create(Id + 4, "JesterCanUseButton", false, TabGroup.OtherRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Swapper]);

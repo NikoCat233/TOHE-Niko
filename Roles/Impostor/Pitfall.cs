@@ -31,7 +31,7 @@ namespace TOHE.Roles.Impostor
 
         public static void SetupCustomOption()
         {
-            SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.Pitfall);
+            SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.Pitfall, canPublic: true);
             ShapeshiftCooldown = FloatOptionItem.Create(Id + 10, "PitfallTrapCooldown", new(1f, 180f, 1f), 20f, TabGroup.ImpostorRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Pitfall])
                 .SetValueFormat(OptionFormat.Seconds);
             MaxTrapCount = FloatOptionItem.Create(Id + 11, "PitfallMaxTrapCount", new(1f, 5f, 1f), 1f, TabGroup.ImpostorRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Pitfall])

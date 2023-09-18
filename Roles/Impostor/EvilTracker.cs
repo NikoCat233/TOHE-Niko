@@ -44,7 +44,7 @@ public static class EvilTracker
     private static Dictionary<byte, HashSet<byte>> ImpostorsId = new();
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.EvilTracker);
+        SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.EvilTracker, canPublic: true);
         OptionCanSeeKillFlash = BooleanOptionItem.Create(Id + 10, "EvilTrackerCanSeeKillFlash", true, TabGroup.ImpostorRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.EvilTracker]);
         OptionTargetMode = StringOptionItem.Create(Id + 11, "EvilTrackerTargetMode", TargetModeText, 2, TabGroup.ImpostorRoles, false)

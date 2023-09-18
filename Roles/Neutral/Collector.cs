@@ -18,7 +18,7 @@ public static class Collector
 
     public static void SetupCustomOption()
     {
-        Options.SetupRoleOptions(Id, TabGroup.NeutralRoles, CustomRoles.Collector);
+        Options.SetupRoleOptions(Id, TabGroup.NeutralRoles, CustomRoles.Collector, canPublic: true);
         CollectorCollectAmount = IntegerOptionItem.Create(Id + 13, "CollectorCollectAmount", new(1, 100, 1), 20, TabGroup.NeutralRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Collector])
             .SetValueFormat(OptionFormat.Votes);
     }

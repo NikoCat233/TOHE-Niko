@@ -48,7 +48,7 @@ public static class Lawyer
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.NeutralRoles, CustomRoles.Lawyer);
+        SetupRoleOptions(Id, TabGroup.NeutralRoles, CustomRoles.Lawyer, canPublic: true);
     //    LawyerVision = FloatOptionItem.Create(Id + 14, "LawyerVision", new(0f, 5f, 0.05f), 1.25f, TabGroup.NeutralRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Lawyer])
     //        .SetValueFormat(OptionFormat.Multiplier);
         CanTargetImpostor = BooleanOptionItem.Create(Id + 10, "LawyerCanTargetImpostor", true, TabGroup.NeutralRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Lawyer]);

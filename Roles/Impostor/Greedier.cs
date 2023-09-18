@@ -18,7 +18,7 @@ public static class Greedier
 
     public static void SetupCustomOption()
     {
-        Options.SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.Greedier);
+        Options.SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.Greedier, canPublic: true);
         OddKillCooldown = FloatOptionItem.Create(Id + 10, "OddKillCooldown", new(0f, 180f, 2.5f), 25f, TabGroup.ImpostorRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Greedier])
             .SetValueFormat(OptionFormat.Seconds);
         EvenKillCooldown = FloatOptionItem.Create(Id + 11, "EvenKillCooldown", new(0f, 180f, 2.5f), 5f, TabGroup.ImpostorRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Greedier])

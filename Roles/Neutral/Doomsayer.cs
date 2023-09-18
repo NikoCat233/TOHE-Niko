@@ -32,7 +32,7 @@ public static class Doomsayer
 
     public static void SetupCustomOption()
     {
-        Options.SetupRoleOptions(Id, TabGroup.NeutralRoles, CustomRoles.Doomsayer);
+        Options.SetupRoleOptions(Id, TabGroup.NeutralRoles, CustomRoles.Doomsayer, canPublic: true);
         DoomsayerAmountOfGuessesToWin = IntegerOptionItem.Create(Id + 10, "DoomsayerAmountOfGuessesToWin", new(1, 10, 1), 3, TabGroup.NeutralRoles, false)
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Doomsayer])
             .SetValueFormat(OptionFormat.Times);

@@ -27,7 +27,7 @@ namespace TOHE.Roles.Crewmate
 
         public static void SetupCustomOption()
         {
-            SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Tracker);
+            SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Tracker, canPublic: true);
             TrackLimitOpt = IntegerOptionItem.Create(Id + 10, "DivinatorSkillLimit", new(0, 20, 1), 1, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Tracker])
                 .SetValueFormat(OptionFormat.Times);
             OptionCanSeeLastRoomInMeeting = BooleanOptionItem.Create(Id + 11, "EvilTrackerCanSeeLastRoomInMeeting", false, TabGroup.CrewmateRoles, false)

@@ -34,7 +34,7 @@ public static class ParityCop
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.ParityCop);
+        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.ParityCop, canPublic: true);
         TryHideMsg = BooleanOptionItem.Create(Id + 10, "ParityCopTryHideMsg", true, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.ParityCop])
             .SetColor(Color.green);
         ParityCheckLimitMax = IntegerOptionItem.Create(Id + 11, "MaxParityCheckLimit", new(0, 20, 1), 5, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.ParityCop])

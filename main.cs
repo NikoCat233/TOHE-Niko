@@ -78,6 +78,7 @@ public class Main : BasePlugin
     public static ConfigEntry<bool> ModeForSmallScreen { get; private set; }
     public static ConfigEntry<bool> EnableRoleSummary { get; private set; }
     public static ConfigEntry<bool> SwitchVanilla { get; private set; }
+    public static ConfigEntry<bool> HostPublic { get; private set; }
     public static ConfigEntry<bool> VersionCheat { get; private set; }
     public static ConfigEntry<bool> GodMode { get; private set; }
 
@@ -218,6 +219,8 @@ public class Main : BasePlugin
     public static Dictionary<byte, List<string>> AwareInteracted = new();
     public static byte ShamanTarget = byte.MaxValue;
     public static bool ShamanTargetChoosen = false;
+
+    public static bool ResetTohOption = false;
     
 
 
@@ -258,6 +261,7 @@ public class Main : BasePlugin
         ModeForSmallScreen = Config.Bind("Client Options", "ModeForSmallScreen", false);
         EnableRoleSummary = Config.Bind("Client Options", "EnableRoleSummary", false); // Reverted to false due to it now being a setting to revert the summary change
         SwitchVanilla = Config.Bind("Client Options", "SwitchVanilla", false);
+        HostPublic = Config.Bind("Client Options", "HostPublic", true);
         VersionCheat = Config.Bind("Client Options", "VersionCheat", false);
         GodMode = Config.Bind("Client Options", "GodMode", false);
 

@@ -100,10 +100,10 @@ class CheckMurderPatch
             return false;
         }
 
-        if (AmongUsClient.Instance.AmHost)
+        if (AmongUsClient.Instance.AmHost && Main.HostPublic.Value)
         {
             __instance.RpcMurderPlayerV3(target);
-            return false;
+            return false; //Cancel all the checks as public host
         }
 
         var divice = 2000f;

@@ -23,7 +23,7 @@ public static class Workhorse
     public static int NumShortTasks;
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.Addons, CustomRoles.Workhorse, zeroOne: true);
+        SetupRoleOptions(Id, TabGroup.Addons, CustomRoles.Workhorse, zeroOne: true, canPublic: true);
         OptionAssignOnlyToCrewmate = BooleanOptionItem.Create(Id + 10, "AssignOnlyToCrewmate", true, TabGroup.Addons, false).SetParent(CustomRoleSpawnChances[CustomRoles.Workhorse]);
         OptionNumLongTasks = IntegerOptionItem.Create(Id + 11, "WorkhorseNumLongTasks", new(0, 5, 1), 1, TabGroup.Addons, false).SetParent(CustomRoleSpawnChances[CustomRoles.Workhorse])
             .SetValueFormat(OptionFormat.Pieces);

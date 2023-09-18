@@ -18,7 +18,7 @@ public static class Mortician
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Mortician);
+        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Mortician, canPublic: true);
         ShowArrows = BooleanOptionItem.Create(Id + 2, "ShowArrows", false, TabGroup.CrewmateRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Mortician]);
     }
     public static void Init()

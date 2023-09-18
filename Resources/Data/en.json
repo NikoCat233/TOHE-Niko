@@ -3024,5 +3024,12 @@
   "ErrorEndTextDescription": "To avoid crashing, the game was forcibly ended.",
   "ForceEnd": "Aborted",
   "EveryoneDied": "Everyone died",
-  "ForceEndText": "Host has aborted the game"
+  "ForceEndText": "Host has aborted the game",
+  "JackalVoteRecruit": "You Recruited <b>{0}</b>！",
+  "JackalVoteRecruitTarget": "You are recruited by <b>{0}</b>！Work for Jackal from now！",
+  "JackalVoteFailRecruit": "You cannot recruit <b>{0}</b>!",
+  "JackalVoteTip": "Currently Jackal <b><color=#00b4eb>Vote to Recruit</color></b>, You got chance to recruit! Pls <b>vote to Recruit</b>，Do not vote out your sidekick",
+  "JackalVoteMessageTitle": "Jackal",
+  "SidekickAssignMode.VoteRecruit": "Vote<color=#00b4eb>Recruit</color>",
+  "HostPublic": "Host Public Room"
 }

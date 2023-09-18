@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Sentry.Unity.Protocol;
 using UnityEngine;
 
 namespace TOHE;
@@ -19,6 +20,7 @@ public static class OptionsMenuBehaviourStartPatch
     private static ClientOptionItem ModeForSmallScreen;
     private static ClientOptionItem EnableRoleSummary;
     private static ClientOptionItem SwitchVanilla;
+    private static ClientOptionItem HostPublic;
     private static ClientOptionItem VersionCheat;
     private static ClientOptionItem GodMode;
 
@@ -32,6 +34,7 @@ public static class OptionsMenuBehaviourStartPatch
             Main.ResetOptions = false;
             Main.VersionCheat.Value = false;
             Main.GodMode.Value = false;
+            Main.HostPublic.Value = true;
         }
 
         if (UnlockFPS == null || UnlockFPS.ToggleButton == null)
@@ -100,14 +103,19 @@ public static class OptionsMenuBehaviourStartPatch
                 Main.Instance.Unload();
             }
         }
-        if ((VersionCheat == null || VersionCheat.ToggleButton == null))
-        {
-            VersionCheat = ClientOptionItem.Create("VersionCheat", Main.VersionCheat, __instance);
-        }
-        if ((GodMode == null || GodMode.ToggleButton == null))
-        {
-            GodMode = ClientOptionItem.Create("GodMode", Main.GodMode, __instance);
-        }
+        //if (HostPublic == null || HostPublic.ToggleButton == null)
+        //{
+        //    HostPublic = ClientOptionItem.Create("HostPublic", Main.HostPublic, __instance, HostPublicToggle);
+        //}
+
+        //if ((VersionCheat == null || VersionCheat.ToggleButton == null) && DebugModeManager.AmDebugger)
+        //{
+        //    VersionCheat = ClientOptionItem.Create("VersionCheat", Main.VersionCheat, __instance);
+        //}
+        //if ((GodMode == null || GodMode.ToggleButton == null) && DebugModeManager.AmDebugger)
+        //{
+        //    GodMode = ClientOptionItem.Create("GodMode", Main.GodMode, __instance);
+        //}
     }
 }
 

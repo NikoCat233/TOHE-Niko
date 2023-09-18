@@ -18,7 +18,7 @@ namespace TOHE.Roles.Impostor
 
         public static void SetupCustomOption()
         {
-            Options.SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.Camouflager);
+            Options.SetupRoleOptions(Id, TabGroup.ImpostorRoles, CustomRoles.Camouflager, canPublic: true);
             CamouflageCooldown = FloatOptionItem.Create(Id + 2, "CamouflageCooldown", new(1f, 180f, 1f), 25f, TabGroup.ImpostorRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Camouflager])
                 .SetValueFormat(OptionFormat.Seconds);
             CamouflageDuration = FloatOptionItem.Create(Id + 4, "CamouflageDuration", new(1f, 180f, 1f), 10f, TabGroup.ImpostorRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Camouflager])

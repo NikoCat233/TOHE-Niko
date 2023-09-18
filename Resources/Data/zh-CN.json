@@ -2117,6 +2117,7 @@
   "RoleRate": "<color=#00fefe>开启</color>",
   "RoleOn": "<color=#ffbd18>优先</color>",
   "RoleOff": "<color=#ff4c6f>关闭</color>",
+  "NoPublic": "不能公开",
   "RoleRateNoColor": "开启",
   "RoleOnNoColor": "优先",
   "RoleOffNoColor": "关闭",
@@ -3031,5 +3032,6 @@
   "JackalVoteFailRecruit": "你不能招募<b>{0}</b>，他可能死了或者是中立或者有特殊附加职业!",
   "JackalVoteTip": "当前豺狼招募模式是<b><color=#00b4eb>投票招募</color></b>，发现你还有招募机会，请适当<b>投票完成招募</b>，不要把你跟班出了",
   "JackalVoteMessageTitle": "[ ★ 豺狼招募 ★ ]",
-  "SidekickAssignMode.VoteRecruit": "投票<color=#00b4eb>招募</color>"
+  "SidekickAssignMode.VoteRecruit": "投票<color=#00b4eb>招募</color>",
+  "HostPublic": "公开房间"
 }

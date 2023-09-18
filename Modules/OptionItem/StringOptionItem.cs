@@ -37,6 +37,9 @@ public class StringOptionItem : OptionItem
         //TOHE的职业生成模式
         if (Selections.Length == 3) return CurrentValue;
 
+        //公开检查
+        if (Selections.Length == 1) return CurrentValue;
+
         //0%～100%or5%～100%の場合
         var offset = 12 - Selections.Length;
         var index = CurrentValue + offset;

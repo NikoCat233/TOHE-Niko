@@ -27,7 +27,7 @@ public static class Repairman
 
     public static void SetupCustomOption()
     {
-        Options.SetupAdtRoleOptions(Id, CustomRoles.Repairman, canSetNum: true);
+        Options.SetupAdtRoleOptions(Id, CustomRoles.Repairman, canSetNum: true, canPublic: true);
         SkillLimit = IntegerOptionItem.Create(Id + 10, "RepairmanSkillLimit", new(0, 100, 1), 50, TabGroup.Addons, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Repairman])
             .SetValueFormat(OptionFormat.Times);
         FixesDoors = BooleanOptionItem.Create(Id + 11, "SabotageMasterFixesDoors", true, TabGroup.Addons, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Repairman]);

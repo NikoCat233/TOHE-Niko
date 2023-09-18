@@ -26,7 +26,7 @@ public static class Marshall
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Marshall);
+        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Marshall, canPublic: true);
     //    OptionMadmateCanFindMarshall = BooleanOptionItem.Create(Id + 14, "MadmateCanFindMarshall", false, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Marshall]);
         OverrideTasksData.Create(Id + 20, TabGroup.CrewmateRoles, CustomRoles.Marshall);
     }

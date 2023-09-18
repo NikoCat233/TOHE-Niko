@@ -19,7 +19,7 @@ public static class Tracefinder
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Tracefinder);
+        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Tracefinder, canPublic: true);
         VitalsCooldown = FloatOptionItem.Create(Id + 10, "VitalsCooldown", new(1f, 60f, 1f), 5f, TabGroup.CrewmateRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Tracefinder])
             .SetValueFormat(OptionFormat.Seconds);
