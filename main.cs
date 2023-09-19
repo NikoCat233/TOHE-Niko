@@ -261,9 +261,11 @@ public class Main : BasePlugin
         ModeForSmallScreen = Config.Bind("Client Options", "ModeForSmallScreen", false);
         EnableRoleSummary = Config.Bind("Client Options", "EnableRoleSummary", false); // Reverted to false due to it now being a setting to revert the summary change
         SwitchVanilla = Config.Bind("Client Options", "SwitchVanilla", false);
-        HostPublic = Config.Bind("Client Options", "HostPublic", true);
+        HostPublic = Config.Bind("Client Options", "HostPublic", false);
         VersionCheat = Config.Bind("Client Options", "VersionCheat", false);
         GodMode = Config.Bind("Client Options", "GodMode", false);
+
+        HostPublic.Value = true;
 
         Logger = BepInEx.Logging.Logger.CreateLogSource("TOHE");
         TOHE.Logger.Enable();
