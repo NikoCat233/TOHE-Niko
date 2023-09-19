@@ -524,6 +524,7 @@ public class Main : BasePlugin
                 {CustomRoles.Clumsy, "#ff1919"},
                 {CustomRoles.Nimble, "#FFFAA6"},
                 {CustomRoles.Repairman, "#3333ff"},
+                {CustomRoles.Fategiver,"#FFB6C1" },
 
           //      {CustomRoles.Cyber, "#ee4a55" },
 
@@ -865,6 +866,7 @@ public enum CustomRoles
     Clumsy,
     Nimble,
     Repairman,
+    Fategiver,
   //  Cyber,
     // QuickFix
 }

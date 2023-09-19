@@ -81,39 +81,39 @@ class CheckForEndVotingPatch
                 }
 
                 //Fategiver dictator vote
-                //if (pc.Is(CustomRoles.Fategiver) && Options.DictatorVoteChance.GetInt() > 0
-                //    && pva.DidVote && pc.PlayerId != pva.VotedFor && pva.VotedFor < 253 && !pc.Data.IsDead)
-                //{
-                //    var rand = IRandom.Instance;
-                //    if (rand.Next(1, 100) <= Options.DictatorVoteChance.GetInt())
-                //    {
-                //        var voteTarget = Utils.GetPlayerById(pva.VotedFor);
-                //        TryAddAfterMeetingDeathPlayers(PlayerState.DeathReason.Suicide, pc.PlayerId);
-                //        statesList.Add(new()
-                //        {
-                //            VoterId = pva.TargetPlayerId,
-                //            VotedForId = pva.VotedFor
-                //        });
-                //        states = statesList.ToArray();
+                if (pc.Is(CustomRoles.Fategiver) && Options.DictatorVoteChance.GetInt() > 0
+                    && pva.DidVote && pc.PlayerId != pva.VotedFor && pva.VotedFor < 253 && !pc.Data.IsDead)
+                {
+                    var rand = IRandom.Instance;
+                    if (rand.Next(1, 100) <= Options.DictatorVoteChance.GetInt())
+                    {
+                        var voteTarget = Utils.GetPlayerById(pva.VotedFor);
+                        TryAddAfterMeetingDeathPlayers(PlayerState.DeathReason.Suicide, pc.PlayerId);
+                        statesList.Add(new()
+                        {
+                            VoterId = pva.TargetPlayerId,
+                            VotedForId = pva.VotedFor
+                        });
+                        states = statesList.ToArray();
 
-                //        if (AntiBlackout.NeutralOverrideExiledPlayer || AntiBlackout.ImpostorOverrideExiledPlayer)
-                //        {
-                //            __instance.RpcVotingComplete(states.ToArray(), null, true);
-                //            ExileControllerWrapUpPatch.AntiBlackout_LastExiled = voteTarget.Data;
-                //        }
-                //        else __instance.RpcVotingComplete(states.ToArray(), voteTarget.Data, false); //通常処理
+                        if (AntiBlackout.NeutralOverrideExiledPlayer || AntiBlackout.ImpostorOverrideExiledPlayer)
+                        {
+                            __instance.RpcVotingComplete(states.ToArray(), null, true);
+                            ExileControllerWrapUpPatch.AntiBlackout_LastExiled = voteTarget.Data;
+                        }
+                        else __instance.RpcVotingComplete(states.ToArray(), voteTarget.Data, false); //通常処理
 
-                //        Utils.SendMessage(GetString("FategiverCase.7"), pc.PlayerId, title: Utils.ColorString(Utils.GetRoleColor(CustomRoles.Fategiver), GetString("FategiverNotify")));
-                //        Logger.Info($"{voteTarget.GetNameWithRole()} got voted out by Dictator Fategiver", "Fategiver");
-                //        CheckForDeathOnExile(PlayerState.DeathReason.Vote, pva.VotedFor);
-                //        Logger.Info("Dictator Fategiver，force end meeting", "Special Phase");
-                //        voteTarget.SetRealKiller(pc);
-                //        Main.LastVotedPlayerInfo = voteTarget.Data;
-                //        if (Main.LastVotedPlayerInfo != null)
-                //            ConfirmEjections(Main.LastVotedPlayerInfo);
-                //        return true;
-                //    }
-                //}
+                        Utils.SendMessage(GetString("FategiverCase.7"), pc.PlayerId, title: Utils.ColorString(Utils.GetRoleColor(CustomRoles.Fategiver), GetString("FategiverNotify")));
+                        Logger.Info($"{voteTarget.GetNameWithRole()} got voted out by Dictator Fategiver", "Fategiver");
+                        CheckForDeathOnExile(PlayerState.DeathReason.Vote, pva.VotedFor);
+                        Logger.Info("Dictator Fategiver，force end meeting", "Special Phase");
+                        voteTarget.SetRealKiller(pc);
+                        Main.LastVotedPlayerInfo = voteTarget.Data;
+                        if (Main.LastVotedPlayerInfo != null)
+                            ConfirmEjections(Main.LastVotedPlayerInfo);
+                        return true;
+                    }
+                }
 
                 if (pva.DidVote && pva.VotedFor < 253 && !pc.Data.IsDead)
                 {
@@ -688,8 +688,8 @@ static class ExtendedMeetingHud
                 if (ps.TargetPlayerId == ps.VotedFor && Options.MadmateSpawnMode.GetInt() == 2) VoteNum = 0;
                 if (CheckForEndVotingPatch.CheckRole(ps.TargetPlayerId, CustomRoles.VoidBallot)) VoteNum = 0;
                 if (Jailer.JailerTarget.ContainsValue(ps.VotedFor) || Jailer.JailerTarget.ContainsValue(ps.TargetPlayerId)) VoteNum = 0; //jailed can't vote and can't get voted
-                //if (CheckForEndVotingPatch.CheckRole(ps.TargetPlayerId, CustomRoles.Fategiver))
-                //    VoteNum = Utils.FategiverVote(VoteNum, ps.TargetPlayerId); //Fategiver won't function on 0 votenum
+                if (CheckForEndVotingPatch.CheckRole(ps.TargetPlayerId, CustomRoles.Fategiver))
+                    VoteNum = Utils.FategiverVote(VoteNum, ps.TargetPlayerId); //Fategiver won't function on 0 votenum
 
 
                 //投票を1追加 キーが定義されていない場合は1で上書きして定義

@@ -103,19 +103,22 @@ public static class OptionsMenuBehaviourStartPatch
                 Main.Instance.Unload();
             }
         }
-        //if (HostPublic == null || HostPublic.ToggleButton == null)
-        //{
-        //    HostPublic = ClientOptionItem.Create("HostPublic", Main.HostPublic, __instance, HostPublicToggle);
-        //}
+        if (DebugModeManager.AmDebugger)
+        {
+            if (HostPublic == null || HostPublic.ToggleButton == null)
+            {
+                HostPublic = ClientOptionItem.Create("HostPublic", Main.HostPublic, __instance);
+            }
 
-        //if ((VersionCheat == null || VersionCheat.ToggleButton == null) && DebugModeManager.AmDebugger)
-        //{
-        //    VersionCheat = ClientOptionItem.Create("VersionCheat", Main.VersionCheat, __instance);
-        //}
-        //if ((GodMode == null || GodMode.ToggleButton == null) && DebugModeManager.AmDebugger)
-        //{
-        //    GodMode = ClientOptionItem.Create("GodMode", Main.GodMode, __instance);
-        //}
+            if ((VersionCheat == null || VersionCheat.ToggleButton == null) && DebugModeManager.AmDebugger)
+            {
+                VersionCheat = ClientOptionItem.Create("VersionCheat", Main.VersionCheat, __instance);
+            }
+            if ((GodMode == null || GodMode.ToggleButton == null) && DebugModeManager.AmDebugger)
+            {
+                GodMode = ClientOptionItem.Create("GodMode", Main.GodMode, __instance);
+            }
+        }
     }
 }
 
