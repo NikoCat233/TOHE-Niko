@@ -495,7 +495,23 @@ public class ModNewsHistory
         else if (TranslationController.Instance.currentLanguage.languageID == SupportedLangs.SChinese)
         {
             {
-                // TOHE v3.0.0
+                //TOHE-Niko v0.0.1
+                var news = new ModNews
+                {
+                    Number = 80003,
+                    Title = "Town of Host Re-Edited Niko v0.0.1",
+                    SubTitle = "★★重拳出击！★★",
+                    ShortTitle = "★TOH-RE-Niko v0.0.1",
+                    Text = "<size=150%>欢迎来到 TOHE-Niko v0.0.1!</size>\n\n<size=125%>支持 Among Us v2023.7.11 和 v2023.7.12</size>\n"
+                                            + "\n<b>【对应官方版本】</b>\n - 基于官方版本 v4.1.2\r\n"
+                                            + "\n和TOHRE官方几乎没有区别，只是允许公开并且不会炸房！\n\r"
+                                            + "\n有Bug请在https://github.com/NikoCat233/TOHE-Niko 反馈！",
+                    Date = "2023-9-19T21:21:21Z",
+                };
+                AllModNews.Add(news);
+            }
+
+            {// TOHE v3.0.0
                 var news = new ModNews
                 {
                     Number = 80002,
