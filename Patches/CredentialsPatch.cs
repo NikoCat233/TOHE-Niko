@@ -74,6 +74,7 @@ public static class Credentials
 #if RELEASE
             //  Main.credentialsText += $"\r\n<color=#a54aff>Modified by </color><color=#ff3b6f>Loonie</color>";
             Main.credentialsText += $"\r\n<color=#a54aff>By <color=#ffc0cb>KARPED1EM</color> & </color><color=#f34c50>Loonie</color>";
+            Main.credentialsText += $"\r\n<color=#a54aff>Modified by NikoCat233</color>" + (Main.HostPublic.Value ? $" Public公开" : $" Not Public非公开");
 #endif
 
 #if DEBUG
