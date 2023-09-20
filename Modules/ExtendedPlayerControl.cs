@@ -1081,7 +1081,7 @@ static class ExtendedPlayerControl
 
     public static void RpcMurderPlayerV0(this PlayerControl killer, PlayerControl target)
     {
-        if (killer.AmOwner || !Main.HostPublic.Value)
+        if (killer.AmOwner || !GameStates.IsOnlineGame || !Main.HostPublic.Value)
             killer.RpcMurderPlayer(target);
         else
             killer.RpcMurderPlayerV2(target);            
@@ -1211,8 +1211,8 @@ static class ExtendedPlayerControl
     {
         if (seer == null || target == null) return false;
         
-        if (seer.Data.IsDead || seer.Is(CustomRoles.GM) 
-            || (seer.AmOwner && Main.GodMode.Value) || seer.PlayerId == target.PlayerId) return true;
+        if ((seer.Data.IsDead || seer.Is(CustomRoles.GM) 
+            || (seer.AmOwner && Main.GodMode.Value) || (seer.PlayerId == target.PlayerId))) return true;
         else if (seer.Is(CustomRoles.God) && Options.GodKnowAddons.GetBool()) return true;
         else if (Options.LoverKnowAddons.GetBool() && Options.LoverKnowRoles.GetBool()
             && seer.Is(CustomRoles.Lovers) && target.Is(CustomRoles.Lovers) /* && !target.Is(CustomRoles.Ntr) */) return true;
@@ -1226,7 +1226,7 @@ static class ExtendedPlayerControl
     {
         if (seer == null || target == null) return false;
 
-        if ((seer.Data.IsDead || seer.Is(CustomRoles.GM) /*|| (seer.AmOwner && Main.GodMode.Value)*/)
+        if ((seer.Data.IsDead || seer.Is(CustomRoles.GM) || (seer.AmOwner && Main.GodMode.Value))
             && target.Is(CustomRoles.Lovers)) return true;
         else if (seer.Is(CustomRoles.Lovers) && target.Is(CustomRoles.Lovers)) return true;
         else if (seer.Is(CustomRoles.God) && Options.GodKnowAddons.GetBool() && target.Is(CustomRoles.Lovers)) return true;

@@ -345,7 +345,7 @@ internal class SelectRolesPatch
             if (Main.EnableGM.Value)
             {
                 PlayerControl.LocalPlayer.RpcSetCustomRole(CustomRoles.GM);
-                PlayerControl.LocalPlayer.RpcSetRole(RoleTypes.Crewmate);
+                PlayerControl.LocalPlayer.RpcSetRole(RoleTypes.CrewmateGhost);
                 PlayerControl.LocalPlayer.Data.IsDead = true;
                 Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].SetDead();
             }
