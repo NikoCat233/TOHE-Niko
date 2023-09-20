@@ -62,7 +62,8 @@ public static class Psychic
     public static bool IsRedForPsy(this PlayerControl target, PlayerControl seer)
     {
         if (target == null || seer == null) return false;
-        if (seer.Is(CustomRoles.Madmate)) return target.GetCustomRole().IsNeutral() || target.GetCustomRole().IsCK();
+        var targetRole = target.GetCustomRole();
+        if (seer.Is(CustomRoles.Madmate)) return targetRole.IsNK() || targetRole.IsNE() || targetRole.IsCK() || targetRole.IsCoven();
         else return RedPlayer != null && RedPlayer.Contains(target.PlayerId);
     }
     public static void OnReportDeadBody()

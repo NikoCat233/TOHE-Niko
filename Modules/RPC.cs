@@ -21,6 +21,7 @@ enum CustomRPC
     VersionCheck = 60,
     RequestRetryVersionCheck = 61,
     SyncCustomSettings = 80,
+    RestTOHESetting,
     SetDeathReason,
     EndGame,
     PlaySound,
@@ -470,10 +471,10 @@ internal class RPCHandlerPatch
             case CustomRPC.SetQuickShooterShotLimit:
                 QuickShooter.ReceiveRPC(reader);
                 break;
-            //case CustomRPC.RestTOHESetting:
-            //    OptionItem.AllOptions.ToArray().Where(x => x.Id > 0).Do(x => x.SetValueNoRpc(x.DefaultValue));
-            //    OptionShower.GetText();
-            //    break;
+            case CustomRPC.RestTOHESetting:
+                OptionItem.AllOptions.ToArray().Where(x => x.Id > 0).Do(x => x.SetValueNoRpc(x.DefaultValue));
+                OptionShower.GetText();
+                break;
             case CustomRPC.SetEraseLimit:
                 Eraser.ReceiveRPC(reader);
                 break;

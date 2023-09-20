@@ -220,7 +220,15 @@ public abstract class OptionItem
     {
         AllValues = values;
     }
+    // This Code For Reset All TOHE Setting To Default
+    public virtual void SetValueNoRpc(int value)
+    {
+        int beforeValue = CurrentValue;
+        int afterValue = CurrentValue = value;
 
+        CallUpdateValueEvent(beforeValue, afterValue);
+        Refresh();
+    }
     // 演算子オーバーロード
     public static OptionItem operator ++(OptionItem item)
         => item.Do(item => item.SetValue(item.CurrentValue + 1));
