@@ -34,6 +34,7 @@ public static class Sheriff
     public static Dictionary<CustomRoles, OptionItem> KillTargetOptions = new();
     public static Dictionary<byte, int> ShotLimit = new();
     public static Dictionary<byte, float> CurrentKillCooldown = new();
+    public static List<byte> SheriffKilled = new();
     public static readonly string[] KillOption =
     {
         "SheriffCanKillAll", "SheriffCanKillSeparately"
@@ -70,6 +71,12 @@ public static class Sheriff
         ShotLimit = new();
         CurrentKillCooldown = new();
         IsEnable = false;
+        SheriffKilled = new();
+        if (Main.HostPublic.Value)
+        {
+            if (!MisfireKillsTarget.GetBool())
+                MisfireKillsTarget.SetValue(1);            
+        }
     }
     public static void Add(byte playerId)
     {
@@ -116,7 +123,7 @@ public static class Sheriff
         else
             ShotLimit.Add(SheriffId, ShotLimitOpt.GetInt());
     }
-    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = CanUseKillButton(id) ? CurrentKillCooldown[id] : 0f;
+    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = CanUseKillButton(id) ? CurrentKillCooldown[id] : 600f;
     public static bool CanUseKillButton(byte playerId)
         => !Main.PlayerStates[playerId].IsDead
         && (CanKillAllAlive.GetBool() || GameStates.AlreadyDied)
@@ -124,6 +131,12 @@ public static class Sheriff
 
     public static bool OnCheckMurder(PlayerControl killer, PlayerControl target)
     {
+        if (!SheriffKilled.Contains(target.PlayerId))
+        {
+            SheriffKilled.Add(target.PlayerId);
+        }
+        else return MisfireKillsTarget.GetBool();
+
         ShotLimit[killer.PlayerId]--;
         Logger.Info($"{killer.GetNameWithRole()} : Number of kills left: {ShotLimit[killer.PlayerId]}", "Sheriff");
         SendRPC(killer.PlayerId);
@@ -140,6 +153,32 @@ public static class Sheriff
         killer.RpcMurderPlayerV3(killer);
         return MisfireKillsTarget.GetBool();
     }
+
+    public static void OnMurderPlayer(PlayerControl killer, PlayerControl target)
+    {
+        if (!SheriffKilled.Contains(target.PlayerId))
+        {
+            SheriffKilled.Add(target.PlayerId);
+        }
+        else return;
+        ShotLimit[killer.PlayerId]--;
+        Logger.Info($"{killer.GetNameWithRole()} : Number of kills left: {ShotLimit[killer.PlayerId]}", "Sheriff");
+        SendRPC(killer.PlayerId);
+        if ((target.CanBeKilledBySheriff() && !(SetNonCrewCanKill.GetBool() && killer.IsNonCrewSheriff() || SidekickSheriffCanGoBerserk.GetBool() && killer.Is(CustomRoles.Recruit)))
+            || (SidekickSheriffCanGoBerserk.GetBool() && killer.Is(CustomRoles.Recruit))
+            || (SetNonCrewCanKill.GetBool() && killer.IsNonCrewSheriff()
+                 && ((target.GetCustomRole().IsImpostor() && NonCrewCanKillImp.GetBool()) || (target.GetCustomRole().IsCrewmate() && NonCrewCanKillCrew.GetBool()) || (target.GetCustomRole().IsNeutral() && NonCrewCanKillNeutral.GetBool())))
+            )
+        {
+            SetKillCooldown(killer.PlayerId);
+            return;
+        }
+        Main.PlayerStates[killer.PlayerId].deathReason = PlayerState.DeathReason.Misfire;
+        Main.PlayerStates[target.PlayerId].deathReason = PlayerState.DeathReason.Sheriff;
+        killer.RpcMurderPlayerV3(killer);
+        return;
+    }
+
     public static string GetShotLimit(byte playerId) => Utils.ColorString(CanUseKillButton(playerId) ? Utils.GetRoleColor(CustomRoles.Sheriff).ShadeColor(0.25f) : Color.gray, ShotLimit.TryGetValue(playerId, out var shotLimit) ? $"({shotLimit})" : "Invalid");
     public static bool CanBeKilledBySheriff(this PlayerControl player)
     {

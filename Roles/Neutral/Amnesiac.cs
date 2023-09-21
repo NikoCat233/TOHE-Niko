@@ -64,7 +64,7 @@ public static class Amnesiac
     {
         RememberLimit = reader.ReadInt32();
     }
-    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = RememberLimit >= 1 ? RememberCooldown.GetFloat() : 300f;
+    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = RememberLimit >= 1 ? RememberCooldown.GetFloat() : 600f;
     public static bool CanUseKillButton(PlayerControl player) => !player.Data.IsDead && RememberLimit >= 1;
     public static void OnCheckMurder(PlayerControl killer, PlayerControl target)
     {

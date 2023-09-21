@@ -288,6 +288,7 @@ public class PlayerState
         Drained,
         Shattered,
         Trap,
+        Sheriff,
 
         etc = -1,
     }

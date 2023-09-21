@@ -51,7 +51,7 @@ public static class Admirer
     {
         AdmireLimit = reader.ReadInt32();
     }
-    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = AdmireLimit >= 1 ? AdmireCooldown.GetFloat() : 300f;
+    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = AdmireLimit >= 1 ? AdmireCooldown.GetFloat() : 600f;
     public static bool CanUseKillButton(PlayerControl player) => !player.Data.IsDead && AdmireLimit >= 1;
     public static void OnCheckMurder(PlayerControl killer, PlayerControl target)
     {

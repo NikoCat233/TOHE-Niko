@@ -66,7 +66,7 @@ public static class CopyCat
           else
               MiscopyLimit.Add(CopyCatId, MiscopyLimitOpt.GetInt());
       } */
-    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = Utils.GetPlayerById(id).IsAlive() ? CurrentKillCooldown[id] : 0f;
+    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = Utils.GetPlayerById(id).IsAlive() ? CurrentKillCooldown[id] : 600f;
 
     public static void AfterMeetingTasks()
     {

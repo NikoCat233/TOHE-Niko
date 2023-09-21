@@ -1285,6 +1285,12 @@ class MurderPlayerPatch
             case CustomRoles.Wildling:
                 Wildling.OnMurderPlayer(killer, target);
                 break;
+            case CustomRoles.Sheriff:
+                if (Main.HostPublic.Value)
+                {
+                    Sheriff.OnMurderPlayer(killer, target);
+                }
+                break;
         }
 
         if (killer.Is(CustomRoles.TicketsStealer) && killer.PlayerId != target.PlayerId)

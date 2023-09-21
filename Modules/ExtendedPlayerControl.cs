@@ -859,7 +859,7 @@ static class ExtendedPlayerControl
                 if (Options.BomberCanKill.GetBool())
                     Main.AllPlayerKillCooldown[player.PlayerId] = Options.BomberKillCD.GetFloat();
                 else
-                    Main.AllPlayerKillCooldown[player.PlayerId] = 300f;
+                    Main.AllPlayerKillCooldown[player.PlayerId] = 600f;
                 break;
             case CustomRoles.Witness:
                 Main.AllPlayerKillCooldown[player.PlayerId] = Options.WitnessCD.GetFloat();

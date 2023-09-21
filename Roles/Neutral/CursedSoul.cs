@@ -58,7 +58,7 @@ public static class CursedSoul
     {
         CurseLimit = reader.ReadInt32();
     }
-    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = CurseLimit >= 1 ? CurseCooldown.GetFloat() + (CurseMax.GetInt() - CurseLimit) * CurseCooldownIncrese.GetFloat() : 300f;
+    public static void SetKillCooldown(byte id) => Main.AllPlayerKillCooldown[id] = CurseLimit >= 1 ? CurseCooldown.GetFloat() + (CurseMax.GetInt() - CurseLimit) * CurseCooldownIncrese.GetFloat() : 600f;
     public static bool CanUseKillButton(PlayerControl player) => !player.Data.IsDead && CurseLimit >= 1;
     public static void OnCheckMurder(PlayerControl killer, PlayerControl target)
     {
