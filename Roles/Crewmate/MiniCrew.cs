@@ -7,8 +7,7 @@ namespace TOHE.Roles.Crewmate
 {
     internal class MiniCrew
     {
-        private static readonly int Id = 9900000;
-        public static bool isEnable;
+        private static readonly int Id = 25000;
         public static bool IsEvilMini;
         public static void SetMiniTeam()
         {
@@ -63,21 +62,15 @@ namespace TOHE.Roles.Crewmate
         {
             SetMiniTeam();
             Age = 0;
-            isEnable = false;
             LastFixedUpdate = new();
             DKillCoolDownPreAge = MiniFinalCD.GetFloat() < MiniBeginCD.GetFloat() ? (MiniBeginCD.GetFloat() - MiniFinalCD.GetFloat()) / 18 : 0f;
             MiniKillCoolDown = MiniBeginCD.GetFloat();
-    }
-        public static void Add(byte playerId)
-        {
-            //playerIdList.Add(playerId);
-            isEnable = true;
         }
 
         public static void OnFixedUpdate(PlayerControl player)
         {
             if (!GameStates.IsInGame || !AmongUsClient.Instance.AmHost) return;
-            if (!player.Is(CustomRoles.MiniCrew) || !isEnable) return;
+            if (!player.Is(CustomRoles.MiniCrew) || !CustomRoles.MiniCrew.RoleExist()) return;
             if (Age >= 18 || (!CountMeetingTime.GetBool() && GameStates.IsMeeting)) return;
 
             if (LastFixedUpdate == Utils.GetTimeStamp()) return;
@@ -94,8 +87,6 @@ namespace TOHE.Roles.Crewmate
 
             if (GrowUpUpdate)
             {
-                Utils.NotifyRoles();
-                SendRPC(player.PlayerId);
                 if (IsEvilMini)
                 {
                     if (Age < 18)
@@ -110,10 +101,12 @@ namespace TOHE.Roles.Crewmate
                     player.SetKillCooldown(forceAnime: true);
                     player.MarkDirtySettings();
                 }
+                SendRPC();
+                Utils.NotifyRoles();
             }
         }
 
-        private static void SendRPC(byte playerId)
+        private static void SendRPC()
         {
             MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SyncMiniCrewAge, SendOption.Reliable, -1);
             writer.Write(Age);

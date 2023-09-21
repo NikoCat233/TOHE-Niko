@@ -867,9 +867,9 @@ internal class SelectRolesPatch
                     case CustomRoles.ChiefOfPolice:
                         ChiefOfPolice.Add(pc.PlayerId);
                         break;
-                    case CustomRoles.MiniCrew:
-                        MiniCrew.Add(pc.PlayerId);
-                        break;
+                    //case CustomRoles.MiniCrew:
+                    //    MiniCrew.Add(pc.PlayerId);
+                    //    break;
                 }
                 foreach (var subRole in pc.GetCustomSubRoles())
                 {
