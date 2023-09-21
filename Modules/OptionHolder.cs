@@ -1173,7 +1173,7 @@ public static class Options
         BountyHunter.SetupCustomOption();
         Chronomancer.SetupCustomOption();
         Councillor.SetupCustomOption();
-        SetupRoleOptions(1000, TabGroup.ImpostorRoles, CustomRoles.CursedWolf); //TOH_Y
+        SetupRoleOptions(1000, TabGroup.ImpostorRoles, CustomRoles.CursedWolf, canPublic: true); //TOH_Y
         GuardSpellTimes = IntegerOptionItem.Create(1010, "GuardSpellTimes", new(1, 15, 1), 3, TabGroup.ImpostorRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.CursedWolf])
             .SetValueFormat(OptionFormat.Times);
@@ -1484,7 +1484,7 @@ public static class Options
         TextOptionItem.Create(100008, "RoleType.CrewKilling", TabGroup.CrewmateRoles)
             .SetGameMode(CustomGameMode.Standard)
             .SetColor(new Color32(140, 255, 255, byte.MaxValue));
-        SetupRoleOptions(8400, TabGroup.CrewmateRoles, CustomRoles.Bodyguard);
+        SetupRoleOptions(8400, TabGroup.CrewmateRoles, CustomRoles.Bodyguard, canPublic: true);
         BodyguardProtectRadius = FloatOptionItem.Create(8410, "BodyguardProtectRadius", new(0.5f, 5f, 0.5f), 1.5f, TabGroup.CrewmateRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Bodyguard])
             .SetValueFormat(OptionFormat.Multiplier);
@@ -1505,7 +1505,7 @@ public static class Options
         RetributionistTasks = OverrideTasksData.Create(8720, TabGroup.CrewmateRoles, CustomRoles.Retributionist);
         Reverie.SetupCustomOption();
         Sheriff.SetupCustomOption();
-        SetupRoleOptions(8900, TabGroup.CrewmateRoles, CustomRoles.Veteran);
+        SetupRoleOptions(8900, TabGroup.CrewmateRoles, CustomRoles.Veteran, canPublic: true);
         VeteranSkillCooldown = FloatOptionItem.Create(8910, "VeteranSkillCooldown", new(1f, 180f, 1f), 20f, TabGroup.CrewmateRoles, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Veteran])
             .SetValueFormat(OptionFormat.Seconds);
@@ -1564,7 +1564,7 @@ public static class Options
             .SetColor(new Color32(127, 140, 141, byte.MaxValue));
         Amnesiac.SetupCustomOption();
         Totocalcio.SetupCustomOption();
-        SetupRoleOptions(11300, TabGroup.NeutralRoles, CustomRoles.FFF);
+        SetupRoleOptions(11300, TabGroup.NeutralRoles, CustomRoles.FFF, canPublic: true);
         Lawyer.SetupCustomOption();
         Maverick.SetupCustomOption();
         SetupRoleOptions(10100, TabGroup.NeutralRoles, CustomRoles.Opportunist, canPublic: true);

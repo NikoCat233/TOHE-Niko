@@ -495,6 +495,23 @@ public class ModNewsHistory
         else if (TranslationController.Instance.currentLanguage.languageID == SupportedLangs.SChinese)
         {
             {
+                //TOHE-Niko v0.0.2
+                var news = new ModNews
+                {
+                    Number = 80004,
+                    Title = "Town of Host Re-Edited Niko v0.0.2",
+                    SubTitle = "★★重拳出击！★★",
+                    ShortTitle = "★TOH-RE-Niko v0.0.2",
+                    Text = "<size=150%>欢迎来到 TOHE-Niko v0.0.2!</size>\n\n<size=125%>支持 Among Us v2023.7.11 和 v2023.7.12</size>\n"
+                                            + "\n修复了会议后模组玩家复活的视觉错误\r\n"
+                                            + "\n修复了以下带刀职业的检测与判定 --BountyHunter\r\nSerialKiller\r\nGreedier\r\nQuickShooter\r\nSans\r\nJuggernaut\r\nReverie\r\nLurker\r\nFFF\r\nDarkHide\r\nUnlucky\r\nLudopath\r\nBoobyTrap\r\nCursedWolf\r\nVeteran\r\nGlitch\r\nBodyguard\r\nSheriff--\n\r"
+                                            + "\n有Bug请在https://github.com/NikoCat233/TOHE-Niko 反馈！",
+
+                    Date = "2023-9-19T21:21:21Z",
+                };
+                AllModNews.Add(news);
+            }
+            {
                 //TOHE-Niko v0.0.1
                 var news = new ModNews
                 {

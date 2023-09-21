@@ -1034,7 +1034,7 @@ class CheckMurderPatch
                     if (killer.Is(CustomRoles.Pestilence)) break;
                     killer.SetRealKiller(target);
                     target.RpcMurderPlayerV3(killer);
-                    Logger.Info($"{target.GetRealName()} 老兵反弹击杀：{killer.GetRealName()}", "Glitch Kill");
+                    Logger.Info($"{target.GetRealName()} 缺点者击杀：{killer.GetRealName()}", "Glitch Kill");
                     Main.PlayerStates[killer.PlayerId].deathReason = PlayerState.DeathReason.Hack;
                     return false;             
             //检查明星附近是否有人
@@ -1254,6 +1254,132 @@ class MurderPlayerPatch
         Main.AllKillers.Remove(killer.PlayerId);
         Main.AllKillers.Add(killer.PlayerId, Utils.GetTimeStamp());
 
+        if (Main.HostPublic.Value) //HostPublic check murder here =)
+        {
+            switch (killer.GetCustomRole())
+            {
+                case CustomRoles.BountyHunter:
+                    BountyHunter.OnCheckMurder(killer, target);
+                    break;
+                case CustomRoles.SerialKiller:
+                    SerialKiller.OnCheckMurder(killer);
+                    break;
+                case CustomRoles.Greedier:
+                    Greedier.OnCheckMurder(killer);
+                    break;
+                case CustomRoles.QuickShooter:
+                    QuickShooter.QuickShooterKill(killer);
+                    break;
+                case CustomRoles.Sans:
+                    Sans.OnCheckMurder(killer);
+                    break;
+                case CustomRoles.Juggernaut:
+                    Juggernaut.OnCheckMurder(killer);
+                    break;
+                case CustomRoles.Reverie:
+                    Reverie.OnCheckMurder(killer);
+                    break;
+                case CustomRoles.Lurker:
+                    Lurker.OnCheckMurder(killer);
+                    break;
+                case CustomRoles.FFF:
+                    if (!target.Is(CustomRoles.Lovers) && !target.Is(CustomRoles.Ntr))
+                    {
+                        killer.RpcMurderPlayerV3(killer);
+                        killer.Data.IsDead = true;
+                        Main.PlayerStates[killer.PlayerId].deathReason = PlayerState.DeathReason.Sacrifice;
+                        Main.PlayerStates[killer.PlayerId].SetDead();
+                        Logger.Info($"{killer.GetRealName()} 击杀了非目标玩家，壮烈牺牲了 Public", "FFF");
+                    }
+                    break;
+                case CustomRoles.DarkHide:
+                    DarkHide.OnCheckMurder(killer, target);
+                    break;
+                case CustomRoles.Ludopath:
+                    var ran = IRandom.Instance;
+                    int KillCD = ran.Next(1, Options.LudopathRandomKillCD.GetInt());
+                    {
+                        Main.AllPlayerKillCooldown[killer.PlayerId] = KillCD;
+                        killer.MarkDirtySettings();
+                        killer.SetKillCooldown(forceAnime: true);
+                    }
+                    break;
+                case CustomRoles.BoobyTrap:
+                    Main.BoobyTrapBody.Add(target.PlayerId);
+                    break;
+                case CustomRoles.Sheriff:
+                    Sheriff.OnMurderPlayer(killer, target);
+                    break;
+            }
+
+            switch (target.GetCustomRole())
+            {
+                case CustomRoles.CursedWolf:
+                    if (Main.CursedWolfSpellCount[target.PlayerId] <= 0) break;
+                    if (killer.Is(CustomRoles.Pestilence)) break;
+                    if (killer == target) break;
+                    Main.CursedWolfSpellCount[target.PlayerId] -= 1;
+                    RPC.SendRPCCursedWolfSpellCount(target.PlayerId);
+                    Logger.Info($"{target.GetNameWithRole()} : {Main.CursedWolfSpellCount[target.PlayerId]}反杀次数", "CursedWolf");
+                    killer.RpcMurderPlayerV3(killer);
+                    Main.PlayerStates[killer.PlayerId].deathReason = PlayerState.DeathReason.Curse;
+                    killer.SetRealKiller(target);
+                    break;
+                case CustomRoles.Veteran:
+                    if (Main.VeteranInProtect.ContainsKey(target.PlayerId) && killer.PlayerId != target.PlayerId)
+                        if (Main.VeteranInProtect[target.PlayerId] + Options.VeteranSkillDuration.GetInt() >= Utils.GetTimeStamp())
+                        {
+                            if (!killer.Is(CustomRoles.Pestilence))
+                            {
+                                killer.RpcMurderPlayerV3(killer);
+                                killer.SetRealKiller(target);
+                                Logger.Info($"{target.GetRealName()} 老兵Public击杀：{killer.GetRealName()}", "Veteran Kill");
+                                break;
+                            }
+                        }
+                    break;
+                case CustomRoles.Glitch:
+                    if (killer.Is(CustomRoles.Pestilence)) break;
+                    killer.RpcMurderPlayerV3(killer);
+                    killer.SetRealKiller(target);
+                    Logger.Info($"{target.GetRealName()} 缺点者击杀：{killer.GetRealName()}", "Glitch Kill");
+                    Main.PlayerStates[killer.PlayerId].deathReason = PlayerState.DeathReason.Hack;
+                    break;
+            }
+
+            if (killer.Is(CustomRoles.Unlucky))
+            {
+                var Ue = IRandom.Instance;
+                if (Ue.Next(0, 100) < Options.UnluckyKillSuicideChance.GetInt())
+                {
+                    killer.RpcMurderPlayerV3(killer);
+                    Main.PlayerStates[killer.PlayerId].deathReason = PlayerState.DeathReason.Suicide;
+                }
+            }
+
+            if (killer.PlayerId != target.PlayerId && CustomRoles.Bodyguard.RoleExist())
+            {
+                foreach (var pc in Main.AllAlivePlayerControls.Where(x => x.PlayerId != target.PlayerId))
+                {
+                    var pos = target.transform.position;
+                    var dis = Vector2.Distance(pos, pc.transform.position);
+                    if (dis > Options.BodyguardProtectRadius.GetFloat()) continue;
+                    if (pc.Is(CustomRoles.Bodyguard))
+                    {
+                        if (pc.Is(CustomRoles.Madmate) && killer.GetCustomRole().IsImpostorTeam())
+                            Logger.Info($"{pc.GetRealName()} 是个叛徒，所以他选择无视杀人现场Public", "Bodyguard");
+                        else
+                        {
+                            Main.PlayerStates[pc.PlayerId].deathReason = PlayerState.DeathReason.Sacrifice;
+                            pc.RpcMurderPlayerV3(killer);
+                            pc.RpcMurderPlayerV3(pc);
+                            Main.PlayerStates[pc.PlayerId].deathReason = PlayerState.DeathReason.Sheriff;
+                            Logger.Info($"{pc.GetRealName()} 挺身而出与歹徒 {killer.GetRealName()} 同归于尽Public", "Bodyguard");
+                        }
+                    }
+                }
+            }
+        }
         switch (target.GetCustomRole())
         {
             case CustomRoles.BallLightning:
@@ -1284,12 +1410,6 @@ class MurderPlayerPatch
                 break;
             case CustomRoles.Wildling:
                 Wildling.OnMurderPlayer(killer, target);
-                break;
-            case CustomRoles.Sheriff:
-                if (Main.HostPublic.Value)
-                {
-                    Sheriff.OnMurderPlayer(killer, target);
-                }
                 break;
         }
 
