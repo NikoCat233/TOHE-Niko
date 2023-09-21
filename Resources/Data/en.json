@@ -1631,6 +1631,7 @@
   "BloodhoundArrowsPointingToDeadBody": "Arrows pointing to dead bodies",
   "BloodhoundLeaveDeadBodyUnreportable": "Bodies the <color=#8B0000>Coroner</color> uses can't be reported",
   "TrackerHideVote": "Hide <color=#3CB371>Tracker</color> Votes",
+  "TrackerCanGetArrowColor": "Can See Colored Arrows",
   "LuckyProbability": "Probability of surviving a kill",
   "ImpCanBeLucky": "<color=#ff1919>Impostors</color> can become <color=#b8d7a3>Lucky</color>",
   "CrewCanBeLucky": "<color=#8cffff>Crewmates</color> can become <color=#b8d7a3>Lucky</color>",

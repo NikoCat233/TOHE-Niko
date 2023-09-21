@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using static TOHE.Options;
 using static TOHE.Translator;
 
@@ -19,10 +18,11 @@ public static class Divinator
 
     public static List<byte> didVote = new();
     public static Dictionary<byte, float> CheckLimit = new();
+    public static Dictionary<byte, float> TempCheckLimit = new();
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Divinator, canPublic: true);
+        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Divinator);
         CheckLimitOpt = IntegerOptionItem.Create(Id + 10, "DivinatorSkillLimit", new(0, 20, 1), 1, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Divinator])
             .SetValueFormat(OptionFormat.Times);
         AccurateCheckMode = BooleanOptionItem.Create(Id + 12, "AccurateCheckMode", false, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Divinator]);
@@ -36,6 +36,7 @@ public static class Divinator
     {
         playerIdList = new();
         CheckLimit = new();
+        TempCheckLimit = new();
         IsEnable = false;
     }
     public static void Add(byte playerId)
@@ -91,6 +92,8 @@ public static class Divinator
                 CustomRoles.Monitor or
                 CustomRoles.Dazzler or
                 CustomRoles.Grenadier or
+                CustomRoles.Imitator or
+                CustomRoles.Bandit or
                 CustomRoles.Lighter
                 => "Result1",
 
@@ -322,6 +325,7 @@ public static class Divinator
                 CustomRoles.Marshall or
                 CustomRoles.Workaholic or
                 CustomRoles.Phantom or
+                CustomRoles.Mini or
                 CustomRoles.Terrorist
                 => "Result29",
 
@@ -480,5 +484,14 @@ public static class Divinator
            }*/
 
         Utils.SendMessage(GetString("DivinatorCheck") + "\n" + msg + "\n\n" + string.Format(GetString("DivinatorCheckLimit"), CheckLimit[player.PlayerId]), player.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Divinator), GetString("DivinatorCheckMsgTitle")));
+    }
+    public static void OnReportDeadBody()
+    {
+        if (!IsEnable) return;
+
+        foreach (var divinatorId in playerIdList)
+        {
+            TempCheckLimit[divinatorId] = CheckLimit[divinatorId];
+        }
     }
 }

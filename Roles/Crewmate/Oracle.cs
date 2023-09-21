@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using static TOHE.Options;
 using static TOHE.Translator;
-using static UnityEngine.GraphicsBuffer;
 
 namespace TOHE.Roles.Crewmate;
 
@@ -20,10 +19,11 @@ public static class Oracle
     public static OptionItem ChangeRecruitTeam;
     public static List<byte> didVote = new();
     public static Dictionary<byte, float> CheckLimit = new();
+    public static Dictionary<byte, float> TempCheckLimit = new();
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Oracle, canPublic: true);
+        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Oracle);
         CheckLimitOpt = IntegerOptionItem.Create(Id + 10, "OracleSkillLimit", new(0, 10, 1), 1, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Oracle])
             .SetValueFormat(OptionFormat.Times);
         //    OracleCheckMode = BooleanOptionItem.Create(Id + 11, "AccurateCheckMode", false, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Oracle]);
@@ -42,6 +42,7 @@ public static class Oracle
     {
         playerIdList = new();
         CheckLimit = new();
+        TempCheckLimit = new();
         IsEnable = false;
     }
     public static void Add(byte playerId)
@@ -80,14 +81,12 @@ public static class Oracle
                 {
                     if (target.Is(CustomRoles.Admired)) text = "Crewmate";
                     else if (target.GetCustomRole().IsImpostorTeamV2() || target.GetCustomSubRoles().Any(role => role.IsImpostorTeamV2())) text = "Impostor";
-                    else if (target.GetCustomRole().IsCoven() && !target.GetCustomSubRoles().Any(role => role.IsConverted())) text = "Coven";
                     else if (target.GetCustomRole().IsNeutralTeamV2() || target.GetCustomSubRoles().Any(role => role.IsNeutralTeamV2())) text = "Neutral";
                     else if (target.GetCustomRole().IsCrewmateTeamV2() && (target.GetCustomSubRoles().Any(role => role.IsCrewmateTeamV2()) || (target.GetCustomSubRoles().Count == 0))) text = "Crewmate";
                 }
                 else 
                 { 
                     if (target.GetCustomRole().IsImpostor() && !target.Is(CustomRoles.Trickster)) text = "Impostor";
-                    else if (target.GetCustomRole().IsCoven()) text = "Coven";
                     else if (target.GetCustomRole().IsNeutral()) text = "Neutral";
                     else text = "Crewmate";
                 }
@@ -223,25 +222,16 @@ public static class Oracle
                         {
                             if (random_number_2 == 1) text = "Neutral";
                             if (random_number_2 == 2) text = "Impostor";
-                            if (random_number_2 == 3) text = "Coven";
                         }
                         if (text == "Neutral")
                         {
                             if (random_number_2 == 1) text = "Crewmate";
                             if (random_number_2 == 2) text = "Impostor";
-                            if (random_number_2 == 3) text = "Coven";
                         }
                         if (text == "Impostor")
                         {
                             if (random_number_2 == 1) text = "Neutral";
                             if (random_number_2 == 2) text = "Crewmate";
-                            if (random_number_2 == 3) text = "Coven";
-                        }
-                        if (text == "Coven")
-                        {
-                            if (random_number_2 == 1) text = "Neutral";
-                            if (random_number_2 == 2) text = "Crewmate";
-                            if (random_number_2 == 3) text = "Impostor";
                         }
                     }
                 }
@@ -249,5 +239,14 @@ public static class Oracle
         }
 
         Utils.SendMessage(GetString("OracleCheck") + "\n" + msg + "\n\n" + string.Format(GetString("OracleCheckLimit"), CheckLimit[player.PlayerId]), player.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Oracle), GetString("OracleCheckMsgTitle")));}
+    }
+    public static void OnReportDeadBody()
+    {
+        if (!IsEnable) return;
+
+        foreach (var oracleId in playerIdList)
+        {
+            TempCheckLimit[oracleId] = CheckLimit[oracleId];
+        }
     }
 }

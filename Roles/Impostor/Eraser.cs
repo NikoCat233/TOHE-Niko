@@ -1,6 +1,6 @@
 ﻿using Hazel;
 using System.Collections.Generic;
-using System.Linq;
+using TOHE.Roles.Crewmate;
 using UnityEngine;
 using static TOHE.Translator;
 
@@ -9,31 +9,36 @@ namespace TOHE.Roles.Impostor;
 internal static class Eraser
 {
     private static readonly int Id = 16800;
+    private static List<byte> playerIdList = new();
     public static bool IsEnable = false;
 
     private static OptionItem EraseLimitOpt;
     public static OptionItem HideVote;
 
     private static List<byte> didVote = new();
-    private static Dictionary<byte, int> EraseLimit = new();
+    public static Dictionary<byte, int> EraseLimit = new();
     private static List<byte> PlayerToErase = new();
+    public static Dictionary<byte, int> TempEraseLimit = new();
 
     public static void SetupCustomOption()
     {
-        Options.SetupRoleOptions(Id, TabGroup.OtherRoles, CustomRoles.Eraser, canPublic: true);
+        Options.SetupRoleOptions(Id, TabGroup.OtherRoles, CustomRoles.Eraser);
         EraseLimitOpt = IntegerOptionItem.Create(Id + 10, "EraseLimit", new(1, 15, 1), 2, TabGroup.OtherRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Eraser])
             .SetValueFormat(OptionFormat.Times);
         HideVote = BooleanOptionItem.Create(Id + 11, "EraserHideVote", false, TabGroup.OtherRoles, false).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Eraser]);
     }
     public static void Init()
     {
+        playerIdList = new();
         EraseLimit = new();
         PlayerToErase = new();
         didVote = new();
+        TempEraseLimit = new();
         IsEnable = false;
     }
     public static void Add(byte playerId)
     {
+        playerIdList.Add(playerId);
         EraseLimit.Add(playerId, EraseLimitOpt.GetInt());
         IsEnable = true;
 
@@ -72,7 +77,7 @@ internal static class Eraser
         }
 
         var targetRole = target.GetCustomRole();
-        if (targetRole.IsTasklessCrewmate() || targetRole.IsNeutral() || targetRole.IsCoven())
+        if (targetRole.IsTasklessCrewmate() || targetRole.IsNeutral() || Main.TasklessCrewmate.Contains(target.PlayerId) || CopyCat.playerIdList.Contains(target.PlayerId))
         {
             Utils.SendMessage(string.Format(GetString("EraserEraseBaseImpostorOrNeutralRoleNotice"), target.GetRealName()), player.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Eraser), GetString("EraserEraseMsgTitle")));
             return;
@@ -90,6 +95,13 @@ internal static class Eraser
     }
     public static void OnReportDeadBody()
     {
+        if (!IsEnable) return;
+
+        foreach (var eraserId in playerIdList)
+        {
+            TempEraseLimit[eraserId] = EraseLimit[eraserId];
+        }
+
         PlayerToErase = new();
         didVote = new();
     }

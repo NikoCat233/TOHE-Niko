@@ -1630,6 +1630,7 @@
   "BloodhoundArrowsPointingToDeadBody": "指向尸体的箭头",
   "BloodhoundLeaveDeadBodyUnreportable": "<color=#8B0000>验尸官</color>无法报告尸体",
   "TrackerHideVote": "隐藏<color=#3CB371>追踪者</color>投票",
+  "TrackerCanGetArrowColor": "箭头使用目标皮肤颜色",
   "LuckyProbability": "触发挡伤的概率",
   "ImpCanBeLucky": "<color=#ff1919>内鬼阵营</color>可以成为<color=#b8d7a3>幸运加持</color>",
   "CrewCanBeLucky": "<color=#8cffff>船员阵营</color>可以成为<color=#b8d7a3>幸运加持</color>",

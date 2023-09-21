@@ -227,18 +227,18 @@ class CheckForEndVotingPatch
                     }
                 }
 
-                //隐藏占卜师的票
-                if (CheckRole(ps.TargetPlayerId, CustomRoles.Divinator) && Divinator.HideVote.GetBool()) continue;
-                //隐藏抹除者的票
-                if (CheckRole(ps.TargetPlayerId, CustomRoles.Eraser) && Eraser.HideVote.GetBool()) continue;
-
-                if (CheckRole(ps.TargetPlayerId, CustomRoles.Tracker) && Tracker.HideVote.GetBool()) continue;
-
+                // Hide Divinator Vote
+                if (CheckRole(ps.TargetPlayerId, CustomRoles.Divinator) && Divinator.HideVote.GetBool() && Divinator.TempCheckLimit[ps.TargetPlayerId] > 0) continue;
+                // Hide Eraser Vote
+                if (CheckRole(ps.TargetPlayerId, CustomRoles.Eraser) && Eraser.HideVote.GetBool() && Eraser.TempEraseLimit[ps.TargetPlayerId] > 0) continue;
+                // Hide Tracker Vote
+                if (CheckRole(ps.TargetPlayerId, CustomRoles.Tracker) && Tracker.HideVote.GetBool() && Tracker.TempTrackLimit[ps.TargetPlayerId] > 0) continue;
+                // Hide Oracle Vote
+                if (CheckRole(ps.TargetPlayerId, CustomRoles.Oracle) && Oracle.HideVote.GetBool() && Oracle.TempCheckLimit[ps.TargetPlayerId] > 0) continue;
+                // Hide Jester Vote
                 if (CheckRole(ps.TargetPlayerId, CustomRoles.Jester) && Options.HideJesterVote.GetBool()) continue;
-
+                // Hide Glitch Vote
                 if (CheckRole(ps.TargetPlayerId, CustomRoles.Glitch)) continue;
-
-                if (CheckRole(ps.TargetPlayerId, CustomRoles.Oracle) && Oracle.HideVote.GetBool()) continue;
 
                 //主动叛变模式下自票无效
                 if (ps.TargetPlayerId == ps.VotedFor && Options.MadmateSpawnMode.GetInt() == 2) continue;
@@ -800,8 +800,8 @@ class MeetingHudStartPatch
                 AddMsg(string.Format(GetString("MediumshipNotifyTarget"), Main.AllPlayerNames[Mediumshiper.ContactPlayer[pc.PlayerId]]), pc.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Mediumshiper), GetString("MediumshipTitle")));
             if (Main.VirusNotify.ContainsKey(pc.PlayerId))
                 AddMsg(Main.VirusNotify[pc.PlayerId], pc.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Virus), GetString("VirusNoticeTitle")));
-            if (Tracker.msgToSend.ContainsKey(pc.PlayerId))
-                AddMsg(Tracker.msgToSend[pc.PlayerId], pc.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Tracker), GetString("TrackerTitle")));
+            //if (Tracker.msgToSend.ContainsKey(pc.PlayerId))
+            //    AddMsg(Tracker.msgToSend[pc.PlayerId], pc.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Tracker), GetString("TrackerTitle")));
             if (pc.Is(CustomRoles.Jackal) && !pc.Data.IsDead)
             {
                 if (Jackal.RecruitLimit[pc.PlayerId] > 0 && Jackal.SidekickAssignMode.GetValue() == 3)
@@ -826,7 +826,7 @@ class MeetingHudStartPatch
         Main.SleuthNotify.Clear();
         Main.VirusNotify.Clear();
         Mortician.msgToSend.Clear();
-        Tracker.msgToSend.Clear();
+        //Tracker.msgToSend.Clear();
         Pirate.OnMeetingStart();
     }
     public static void Prefix(MeetingHud __instance)
