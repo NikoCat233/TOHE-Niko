@@ -1714,10 +1714,12 @@ public static class Options
         CovenRolesMinPlayer = IntegerOptionItem.Create(206, "CovenRolesMinPlayer", new(0, 15, 1), 0, TabGroup.CovenRoles, false)
             .SetGameMode(CustomGameMode.Standard)
             .SetHeader(true)
-            .SetValueFormat(OptionFormat.Players);
+            .SetValueFormat(OptionFormat.Players)
+            .SetHidden(Main.HostPublic.Value);
         CovenRolesMaxPlayer = IntegerOptionItem.Create(207, "CovenRolesMaxPlayer", new(0, 15, 1), 0, TabGroup.CovenRoles, false)
             .SetGameMode(CustomGameMode.Standard)
-            .SetValueFormat(OptionFormat.Players);
+            .SetValueFormat(OptionFormat.Players)
+            .SetHidden(Main.HostPublic.Value);
         CovenKnowAlliesRole = BooleanOptionItem.Create(212, "CovenKnowAlliesRole", true, TabGroup.CovenRoles, false)
             .SetGameMode(CustomGameMode.Standard);
         Banshee.SetupCustomOption();

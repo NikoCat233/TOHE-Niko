@@ -521,6 +521,8 @@ public static class Utils
             case CustomRoles.PlagueBearer:
             case CustomRoles.Pestilence:
             case CustomRoles.Masochist:
+            case CustomRoles.Executioner:
+            case CustomRoles.Lawyer:
             case CustomRoles.Doomsayer:
             case CustomRoles.Seeker:
             case CustomRoles.Romantic:
@@ -542,16 +544,6 @@ public static class Utils
                     hasTasks = false;
                 if (p.IsDead)
                     hasTasks = false;
-                break;
-            case CustomRoles.Executioner:
-                if (Executioner.ChangeRolesAfterTargetKilled.GetValue() <= 5)
-                    hasTasks = !ForRecompute;
-                else hasTasks = false;
-                break;
-            case CustomRoles.Lawyer:
-                if (Lawyer.ChangeRolesAfterTargetKilled.GetValue() != 1)
-                    hasTasks = !ForRecompute;
-                else hasTasks = false;
                 break;
             default:
                 if (role.IsImpostor()) hasTasks = false;

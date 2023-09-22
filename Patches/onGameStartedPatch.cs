@@ -32,7 +32,7 @@ internal class ChangeRoleSettings
                 Main.NormalOptions.roleOptions.SetRoleRate(RoleTypes.Engineer, 0, 0);
                 Main.NormalOptions.roleOptions.SetRoleRate(RoleTypes.Shapeshifter, 0, 0);
             }
-
+            HostPublicSettings.ChangeSettings();
             Main.PlayerStates = new();
 
             Main.AllPlayerKillCooldown = new();

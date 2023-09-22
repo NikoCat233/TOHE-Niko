@@ -92,8 +92,8 @@ public static class Divinator
                 CustomRoles.Monitor or
                 CustomRoles.Dazzler or
                 CustomRoles.Grenadier or
-                CustomRoles.Imitator or
-                CustomRoles.Bandit or
+                //CustomRoles.Imitator or
+                //CustomRoles.Bandit or
                 CustomRoles.Lighter
                 => "Result1",
 
@@ -325,7 +325,7 @@ public static class Divinator
                 CustomRoles.Marshall or
                 CustomRoles.Workaholic or
                 CustomRoles.Phantom or
-                CustomRoles.Mini or
+                CustomRoles.MiniCrew or
                 CustomRoles.Terrorist
                 => "Result29",
 

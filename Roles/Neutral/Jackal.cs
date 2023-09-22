@@ -84,9 +84,6 @@ public static class Jackal
         RecruitLimit = new();
         IsEnable = false;
         ResetKillCooldownWhenSbGetKilled = OptionResetKillCooldownWhenSbGetKilled;
-        if (Main.HostPublic.Value)
-            SidekickAssignMode.SetValue(3);
-
     }
     public static void Add(byte playerId)
     {

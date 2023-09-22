@@ -1060,6 +1060,22 @@ static class ExtendedPlayerControl
             RPC.PlaySoundRPC(killer.PlayerId, Sounds.TaskComplete);
         }, Options.TrapperBlockMoveTime.GetFloat(), "Trapper BlockMove");
     }
+    public static bool IsAmneCrew(this PlayerControl target)
+    {
+        return target.Is(CustomRoles.Luckey)
+            || target.Is(CustomRoles.Needy)
+            || target.Is(CustomRoles.SuperStar)
+            || target.Is(CustomRoles.CyberStar)
+            || target.Is(CustomRoles.Mayor)
+            || target.Is(CustomRoles.Paranoia)
+            || target.Is(CustomRoles.Dictator)
+            || target.Is(CustomRoles.NiceGuesser)
+            || target.Is(CustomRoles.Bodyguard)
+            || target.Is(CustomRoles.Observer)
+            || target.Is(CustomRoles.Retributionist)
+            || target.Is(CustomRoles.Lookout)
+            || target.Is(CustomRoles.Bodyguard);
+    }
     public static bool IsDouseDone(this PlayerControl player)
     {
         if (!player.Is(CustomRoles.Arsonist)) return false;

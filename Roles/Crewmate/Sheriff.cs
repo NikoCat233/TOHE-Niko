@@ -13,7 +13,7 @@ public static class Sheriff
     public static bool IsEnable = false;
 
     public static OptionItem KillCooldown;
-    private static OptionItem MisfireKillsTarget;
+    public static OptionItem MisfireKillsTarget;
     public static OptionItem ShotLimitOpt;
     public static OptionItem ShowShotLimit;
     private static OptionItem CanKillAllAlive;
@@ -72,11 +72,6 @@ public static class Sheriff
         CurrentKillCooldown = new();
         IsEnable = false;
         SheriffKilled = new();
-        if (Main.HostPublic.Value)
-        {
-            if (!MisfireKillsTarget.GetBool())
-                MisfireKillsTarget.SetValue(1);            
-        }
     }
     public static void Add(byte playerId)
     {
