@@ -3,6 +3,7 @@ using AmongUs.GameOptions;
 using HarmonyLib;
 using Hazel;
 using InnerNet;
+using Rewired.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -109,6 +110,18 @@ class OnPlayerJoinedPatch
             if (Main.SayStartTimes.ContainsKey(client.Id)) Main.SayStartTimes.Remove(client.Id);
             if (Main.SayBanwordsTimes.ContainsKey(client.Id)) Main.SayBanwordsTimes.Remove(client.Id);
             //if (Main.newLobby && Options.ShareLobby.GetBool()) Cloud.ShareLobby();
+            _ = new LateTask(() =>
+            {
+                var clientData = Utils.GetPlayerInfoById(client.Id);
+                if (clientData.IsNullOrDestroyed() || clientData == null) return;
+                if (clientData.DefaultOutfit.ColorId < 0 || Palette.PlayerColors.Length <= clientData.DefaultOutfit.ColorId)
+                {
+                    var msg = GetString("Error.InvalidColor");
+                    msg += "\n" + string.Join(",", $"{clientData.PlayerName}");
+                    Utils.SendMessage(msg);
+                    AmongUsClient.Instance.KickPlayer(client.Id, false);
+                }
+            }, 4f, "OnGameJoinedPatch");
         }
     }
 }

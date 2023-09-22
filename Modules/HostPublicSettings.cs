@@ -3,7 +3,7 @@ using TOHE.Roles.Neutral;
 
 namespace TOHE.Modules
 {
-    public class HostPublicSettings
+    public static class HostPublicSettings
     {
         public static void ChangeSettings()
         {

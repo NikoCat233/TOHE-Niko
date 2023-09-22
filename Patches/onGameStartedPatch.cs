@@ -149,6 +149,17 @@ internal class ChangeRoleSettings
                 msg += "\n" + string.Join(",", invalidColor.Select(p => $"{p.name}"));
                 Utils.SendMessage(msg);
                 Logger.Error(msg, "CoStartGame");
+
+                Main.AllPlayerControls
+                    .Where(p => p.Data.DefaultOutfit.ColorId < 0 || Palette.PlayerColors.Length <= p.Data.DefaultOutfit.ColorId)
+                    .Do(p => AmongUsClient.Instance.KickPlayer(p.GetClientId(), false));
+
+                _ = new LateTask(() =>
+                {
+                    CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Error);
+                    GameManager.Instance.enabled = false;
+                    GameManager.Instance.RpcEndGame(GameOverReason.ImpostorDisconnect, false);
+                }, 2f, "InvalidColor on game start");
             }
 
             foreach (var target in Main.AllPlayerControls)
