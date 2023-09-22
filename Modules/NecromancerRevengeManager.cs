@@ -85,6 +85,12 @@ public static class NecromancerRevengeManager
             else pc.ShowPopUp(Utils.ColorString(Utils.GetRoleColor(CustomRoles.Judge), GetString("GuessMiniCrew")));
             return true;
         }
+        if (target.Is(CustomRoles.Onbound) && Options.OnBoundAntiAvange.GetBool())
+        {
+            if (!isUI) Utils.SendMessage(GetString("GuessOnBound"), pc.PlayerId, title: Utils.ColorString(Utils.GetRoleColor(CustomRoles.Judge), GetString("GuessMiniCrew")));
+            else pc.ShowPopUp(Utils.ColorString(Utils.GetRoleColor(CustomRoles.Judge), GetString("GuessOnBound")));
+            return true;
+        }
 
         Logger.Info($"{pc.GetNameWithRole()} 复仇了 {target.GetNameWithRole()}", "Necromancer");
 

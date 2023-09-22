@@ -50,6 +50,7 @@ class OnGameJoinedPatch
 
             _ = new LateTask(() =>
             {
+                HostPublicSettings.ChangeSettings();
                 if (BanManager.CheckEACList(PlayerControl.LocalPlayer.FriendCode) && GameStates.IsOnlineGame)
                 {
                     AmongUsClient.Instance.ExitGame(DisconnectReasons.Banned);

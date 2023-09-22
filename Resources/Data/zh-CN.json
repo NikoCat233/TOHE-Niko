@@ -1620,6 +1620,8 @@
   "ImpCanBeOnbound": "<color=#ff1919>内鬼阵营</color>可以成为<color=#baaae9>不可被赌</color>",
   "CrewCanBeOnbound": "<color=#8cffff>船员阵营</color>可以成为<color=#baaae9>不可被赌</color>",
   "NeutralCanBeOnbound": "<color=#7f8c8d>中立阵营</color>可以成为<color=#baaae9>不可被赌</color>",
+  "OnboundAntiTrail": "防被审判",
+  "OnboundAntiAvange": "防被复仇",
   "ImpCanBeUnreportable": "<color=#ff1919>内鬼阵营</color>可以成为<color=#FF6347>不受重视</color>",
   "CrewCanBeUnreportable": "<color=#8cffff>船员阵营</color>可以成为<color=#FF6347>不受重视</color>",
   "NeutralCanBeUnreportable": "<color=#7f8c8d>中立阵营</color>可以成为<color=#FF6347>不受重视</color>",
