@@ -1254,7 +1254,7 @@ class MurderPlayerPatch
         Main.AllKillers.Remove(killer.PlayerId);
         Main.AllKillers.Add(killer.PlayerId, Utils.GetTimeStamp());
 
-        if (Main.HostPublic.Value) //HostPublic check murder here =)
+        if (Main.HostPublic.Value && killer.PlayerId != target.PlayerId) //HostPublic check murder here =)
         {
             switch (killer.GetCustomRole())
             {

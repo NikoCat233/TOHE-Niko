@@ -247,7 +247,7 @@ internal class RPCHandlerPatch
                                     Logger.SendInGame(msg);
                                     AmongUsClient.Instance.KickPlayer(__instance.GetClientId(), false);
                                 }
-                            }, 5f, "Kick");
+                            }, 5f, "Version Kick");
                         }
                     }
                     // Kick Unmached Player End
@@ -267,6 +267,11 @@ internal class RPCHandlerPatch
                 break;
             case CustomRPC.SyncCustomSettings:
                 if (AmongUsClient.Instance.AmHost) break;
+                if (!IsVersionMatch(__instance.PlayerId))
+                {
+                    RPC.RpcVersionCheck();
+                    break;
+                }
                 List<OptionItem> list = new();
                 var startAmount = reader.ReadInt32();
                 var lastAmount = reader.ReadInt32();
@@ -627,7 +632,7 @@ internal class RPCHandlerPatch
         }
     }
 
-    private static bool IsVersionMatch(Byte PlayerId)
+    public static bool IsVersionMatch(Byte PlayerId)
     {
         if (Main.VersionCheat.Value) return true;
         Version version = Main.playerVersion[PlayerId].version;
