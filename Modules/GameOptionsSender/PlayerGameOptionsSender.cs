@@ -405,6 +405,9 @@ public class PlayerGameOptionsSender : GameOptionsSender
             case CustomRoles.Pitfall:
                 Pitfall.ApplyGameOptions();
                 break;
+            case CustomRoles.Blackmailer:
+                Blackmailer.ApplyGameOptions();
+                break;
         }
 
         if (Main.AllPlayerControls.Where(x => x.Is(CustomRoles.Bewilder) && !x.IsAlive() && x.GetRealKiller()?.PlayerId == player.PlayerId && !x.Is(CustomRoles.Hangman)).Any())

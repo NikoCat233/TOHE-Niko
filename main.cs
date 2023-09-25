@@ -664,6 +664,7 @@ public enum CustomRoles
     Ludopath,
     Chronomancer,
     Pitfall,
+    Blackmailer,
     // Flashbang,
     //Crewmate(Vanilla)
     Engineer,

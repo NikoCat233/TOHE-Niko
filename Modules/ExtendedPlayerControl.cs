@@ -1006,6 +1006,9 @@ static class ExtendedPlayerControl
                     MiniCrew.SetKillCooldown(player.PlayerId);
                 }
                 break;
+            case CustomRoles.Blackmailer:
+                Main.AllPlayerKillCooldown[player.PlayerId] = Blackmailer.KillCoolDown.GetFloat();
+                break;
         }
         if (player.PlayerId == LastImpostor.currentId)
             LastImpostor.SetKillCooldown();

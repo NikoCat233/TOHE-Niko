@@ -807,6 +807,10 @@ class MeetingHudStartPatch
                 if (Jackal.RecruitLimit[pc.PlayerId] > 0 && Jackal.SidekickAssignMode.GetValue() == 3)
                     AddMsg(GetString("JackalVoteTip"), pc.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Jackal), GetString("JackalVoteMessageTitle")));
             }
+            if (Blackmailer.ForBlackmailer.ContainsKey(pc.PlayerId) && !pc.Data.IsDead)
+            {
+                AddMsg(string.Format(GetString("BlackmailerDead"), Blackmailer.TargetSpeakTimes.GetInt()), pc.PlayerId, Utils.ColorString(Utils.GetRoleColor(CustomRoles.Blackmailer), GetString("BlackmailerTitle")));
+            }
         }
         //宝箱怪的消息（合并）
         if (MimicMsg != "")

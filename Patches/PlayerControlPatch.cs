@@ -1704,6 +1704,10 @@ class ShapeshiftPatch
                     if (shapeshifting)
                         Pitfall.OnShapeshift(shapeshifter);
                     break;
+                case CustomRoles.Blackmailer:
+                    if (shapeshifting)
+                        Blackmailer.OnShapeShift(shapeshifter, target);
+                    break;
             }
         }
 

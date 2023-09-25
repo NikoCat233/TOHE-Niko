@@ -2365,6 +2365,7 @@ public static class Utils
         BountyHunter.AfterMeetingTasks();
         EvilTracker.AfterMeetingTasks();
         SerialKiller.AfterMeetingTasks();
+        Blackmailer.AfterMeetingTasks();
         Spiritualist.AfterMeetingTasks();
         Vulture.AfterMeetingTasks();
         //Baker.AfterMeetingTasks();

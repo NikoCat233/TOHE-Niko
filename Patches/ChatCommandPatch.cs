@@ -42,6 +42,7 @@ internal class ChatCommands
         Logger.Info(text, "SendChat");
         if (text.Length >= 3) if (text[..2] == "/r" && text[..3] != "/rn" && text[..3] != "/rs") args[0] = "/r";
         if (text.Length >= 4) if (text[..3] == "/up") args[0] = "/up";
+        if (Blackmailer.TargetCheckMsg(PlayerControl.LocalPlayer)) goto Skip;
         if (GuessManager.GuesserMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (Judge.TrialMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (ParityCop.ParityCheckMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
@@ -1017,6 +1018,7 @@ internal class ChatCommands
         string subArgs = "";
         //if (text.Length >= 3) if (text[..2] == "/r" && text[..3] != "/rn") args[0] = "/r";
         //   if (SpamManager.CheckSpam(player, text)) return;
+        if (Blackmailer.TargetCheckMsg(player)) return;
         if (GuessManager.GuesserMsg(player, text)) { canceled = true; return; }
         if (Judge.TrialMsg(player, text)) { canceled = true; return; }
         if (ParityCop.ParityCheckMsg(player, text)) { canceled = true; return; }
@@ -1026,7 +1028,7 @@ internal class ChatCommands
         if (Mediumshiper.MsMsg(player, text)) return;
         if (MafiaRevengeManager.MafiaMsgCheck(player, text)) return;
         if (NecromancerRevengeManager.NecromancerMsgCheck(player, text)) return;
-        if (RetributionistRevengeManager.RetributionistMsgCheck(player, text)) return;
+        if (RetributionistRevengeManager.RetributionistMsgCheck(player, text)) return;        
         Directory.CreateDirectory(modTagsFiles);
         Directory.CreateDirectory(sponsorTagsFiles);
         switch (args[0])

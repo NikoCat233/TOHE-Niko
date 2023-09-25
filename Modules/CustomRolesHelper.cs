@@ -1,6 +1,7 @@
 using AmongUs.GameOptions;
 using System.Linq;
 using TOHE.Roles.Crewmate;
+using TOHE.Roles.Impostor;
 using TOHE.Roles.Neutral;
 
 namespace TOHE;
@@ -142,6 +143,7 @@ static class CustomRolesHelper
                 CustomRoles.Pitfall => CustomRoles.Shapeshifter,
                 CustomRoles.Swapper => CustomRoles.Crewmate,
                 CustomRoles.MiniCrew => MiniCrew.IsEvilMini ? CustomRoles.Impostor : CustomRoles.Crewmate,
+                CustomRoles.Blackmailer => CustomRoles.Shapeshifter,
                 _ => role.IsImpostor() ? CustomRoles.Impostor : CustomRoles.Crewmate,
             };
     }
@@ -601,7 +603,8 @@ static class CustomRolesHelper
             CustomRoles.Camouflager or
             CustomRoles.Twister or
             CustomRoles.Lurker or
-            CustomRoles.Pitfall
+            CustomRoles.Pitfall or
+            CustomRoles.Blackmailer
             || (role is CustomRoles.MiniCrew && MiniCrew.IsEvilMini);
     }
     public static bool IsNeutral(this CustomRoles role)

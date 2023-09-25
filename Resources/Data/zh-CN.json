@@ -3037,5 +3037,19 @@
   "JackalVoteTip": "当前豺狼招募模式是<b><color=#00b4eb>投票招募</color></b>，发现你还有招募机会，请适当<b>投票完成招募</b>，不要把你跟班出了",
   "JackalVoteMessageTitle": "[ ★ 豺狼招募 ★ ]",
   "SidekickAssignMode.VoteRecruit": "投票<color=#00b4eb>招募</color>",
-  "HostPublic": "公开房间"
+  "HostPublic": "公开房间",
+  "Blackmailer": "勒索者",
+  "BlackmailerInfo": "给我闭嘴吧你！",
+  "BlackmailerInfoLong": "(内鬼阵营):\n勒索者变形目标时会勒该玩家，被勒索的玩家无法说话，当说话次数大于设置的时候，被勒索的人就会被杀死",
+  "BlackmailerSkillCooldown": "勒索冷却时间",
+  "BlackmailerSkillLimit": "勒索者技能上限",
+  "BlackmailerTargetChances": "目标说话上限",
+  "BlackmailerHideTargetMsg": "尝试隐藏目标的发言",
+  "BlackmailerSsMsg": "你勒索了一名玩家！",
+  "BlackmailerFailMsg1": "你的技能次数到达上限！",
+  "BlackmailerFailMsg2": "你不能再勒索这名玩家！",
+  "BlackmailerSucceed": "玩家<b>{0}</b>不愿屈服于勒索者，壮烈牺牲！",
+  "BlackmailerTarget": "不要继续说话了，否则你会被勒索致死！\n当前发言次数:{0}次",
+  "BlackmailerShutUp": "你被勒索了，不要发言或发指令，否则\n勒索者会杀死你！\n最大发言次数:{0}次，超过立刻勒索暴毙！",
+  "BlackmailerTitle": "[ ★ 勒索违法 ★ ]"
 }
