@@ -135,30 +135,40 @@ class GameEndChecker
                     }
                 }
 
-                //利己主义者抢夺胜利（船员）
+                // Egoist (Crewmate)
                 if (CustomWinnerHolder.WinnerTeam == CustomWinner.Crewmate)
                 {
-                    foreach (var pc in Main.AllAlivePlayerControls.Where(x => x.GetCustomRole().IsCrewmate()))
-                        if (pc.Is(CustomRoles.Egoist))
+                    var egoistCrewList = Main.AllAlivePlayerControls.Where(x => x != null && x.GetCustomRole().IsCrewmate() && x.Is(CustomRoles.Egoist));
+
+                    if (egoistCrewList.Any())
+                    {
+                        reason = GameOverReason.ImpostorByKill;
+                        CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Egoist);
+
+                        foreach (var egoistCrew in egoistCrewList)
                         {
-                            reason = GameOverReason.ImpostorByKill;
-                            CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Egoist);
-                            CustomWinnerHolder.WinnerRoles.Add(CustomRoles.Egoist);
-                            CustomWinnerHolder.WinnerIds.Add(pc.PlayerId);
+                            CustomWinnerHolder.WinnerIds.Add(egoistCrew.PlayerId);
                         }
+                    }
                 }
 
-                //利己主义者抢夺胜利（内鬼）
+                // Egoist (Impostor)
                 if (CustomWinnerHolder.WinnerTeam == CustomWinner.Impostor)
                 {
-                    foreach (var pc in Main.AllAlivePlayerControls.Where(x => x.GetCustomRole().IsImpostor()))
-                        if (pc.Is(CustomRoles.Egoist))
+                    var egoistImpList = Main.AllAlivePlayerControls.Where(x => x != null && x.GetCustomRole().IsImpostor() && x.Is(CustomRoles.Egoist));
+
+                    if (egoistImpList.Any())
+                    {
+                        reason = GameOverReason.ImpostorByKill;
+                        CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Egoist);
+
+                        foreach (var egoistImp in egoistImpList)
                         {
-                            reason = GameOverReason.ImpostorByKill;
-                            CustomWinnerHolder.ResetAndSetWinner(CustomWinner.Egoist);
-                            CustomWinnerHolder.WinnerIds.Add(pc.PlayerId);
+                            CustomWinnerHolder.WinnerIds.Add(egoistImp.PlayerId);
                         }
+                    }
                 }
+
 
                 //神抢夺胜利
                 if (CustomRolesHelper.RoleExist(CustomRoles.God))

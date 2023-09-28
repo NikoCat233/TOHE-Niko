@@ -16,7 +16,7 @@ class ServerUpdatePatch
         //Changing server version for AU mods
         if (!Main.HostPublic.Value)
         {
-            __result = Constants.GetVersion(2222, 0, 0, 0);
+            __result += 25;
             Logger.Info($"IsOnlineGame: {__result}", "VersionServer");
             return false;
         }

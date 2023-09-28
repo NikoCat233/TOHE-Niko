@@ -29,9 +29,13 @@ public static class Puppeteer
         PuppeteerList = new();
         IsEnable = false;
     }
-    public static void Add()
+    public static void Add(byte playerId)
     {
         IsEnable = true;
+
+        // Double Trigger
+        var pc = Utils.GetPlayerById(playerId);
+        pc.AddDoubleTrigger();
     }
     private static void SendRPC(byte puppetId, byte targetId, byte typeId)
     {

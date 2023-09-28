@@ -524,7 +524,7 @@ internal class SelectRolesPatch
                         Camouflager.Add(pc.PlayerId);
                         break;
                     case CustomRoles.Puppeteer:
-                        Puppeteer.Add();
+                        Puppeteer.Add(pc.PlayerId);
                         break;
                     case CustomRoles.Sniper:
                         Sniper.Add(pc.PlayerId);
