@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TOHE.Modules;
 using UnityEngine;
 using static TOHE.Translator;
 
@@ -144,8 +145,8 @@ internal class ControllerManagerUpdatePatch
         //强制结束会议或召开会议
         if (GetKeysDown(KeyCode.Return, KeyCode.M, KeyCode.LeftShift) && GameStates.IsInGame)
         {
-            if (GameStates.IsMeeting) MeetingHud.Instance.RpcClose();
-            else PlayerControl.LocalPlayer.NoCheckStartMeeting(null, true);
+            if (GameStates.IsMeeting) ForceMeeting.Action(false);
+            else ForceMeeting.Action();
         }
         //立即开始        
         if (Input.GetKeyDown(KeyCode.LeftShift) && GameStates.IsCountDown && !HudManager.Instance.Chat.IsOpenOrOpening)
@@ -217,6 +218,9 @@ internal class ControllerManagerUpdatePatch
             Logger.isAlsoInGame = !Logger.isAlsoInGame;
             Logger.SendInGame($"游戏中输出日志：{Logger.isAlsoInGame}");
         }
+
+        if (GetKeysDown(KeyCode.F6) && GameStates.IsMeeting)
+            ForceMeeting.Action(true);
 
         //--下面是调试模式的命令--//
         if (!DebugModeManager.IsDebugMode) return;

@@ -45,6 +45,7 @@ internal class ChatCommands
         if (Blackmailer.TargetCheckMsg(PlayerControl.LocalPlayer)) goto Skip;
         if (GuessManager.GuesserMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (Judge.TrialMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
+        if (President.CheckMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (ParityCop.ParityCheckMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (Pirate.DuelCheckMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
         if (Councillor.MurderMsg(PlayerControl.LocalPlayer, text)) goto Canceled;
@@ -673,10 +674,13 @@ internal class ChatCommands
                     break;
 
                 case "/mt":
-                case "/hy":
                     canceled = true;
                     if (GameStates.IsMeeting) MeetingHud.Instance.RpcClose();
                     else PlayerControl.LocalPlayer.NoCheckStartMeeting(null, true);
+                    break;
+                case "/hy":
+                    canceled = true;
+                    if (GameStates.IsMeeting) ForceMeeting.Action(true);
                     break;
 
                 case "/cs":
@@ -1021,6 +1025,7 @@ internal class ChatCommands
         if (Blackmailer.TargetCheckMsg(player)) return;
         if (GuessManager.GuesserMsg(player, text)) { canceled = true; return; }
         if (Judge.TrialMsg(player, text)) { canceled = true; return; }
+        if (President.CheckMsg(player, text)) { canceled = true; return; }
         if (ParityCop.ParityCheckMsg(player, text)) { canceled = true; return; }
         if (Pirate.DuelCheckMsg(player, text)) { canceled = true; return; }
         if (Councillor.MurderMsg(player, text)) { canceled = true; return; }

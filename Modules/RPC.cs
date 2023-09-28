@@ -96,6 +96,7 @@ enum CustomRPC
     SetTracefinderArrow,
     Judge,
     Guess,
+    //President,
     MeetingKill,
     MafiaRevenge,
     RetributionistRevenge,
@@ -130,6 +131,7 @@ enum CustomRPC
     SyncNWitch,
     SyncShroud,
     SyncMiniCrewAge,
+    //SyncPresidentSkill,
 }
 public enum Sounds
 {

@@ -583,13 +583,14 @@ public static class Utils
             (pc.Is(CustomRoles.Marshall) && !Options.MarshallCanBeMadmate.GetBool()) ||
             (pc.Is(CustomRoles.Farseer) && !Options.FarseerCanBeMadmate.GetBool()) ||
             (pc.Is(CustomRoles.Retributionist) && !Options.RetributionistCanBeMadmate.GetBool()) ||
+            (pc.Is(CustomRoles.President) && !Options.PresidentCanBeMadmate.GetBool()) ||
             pc.Is(CustomRoles.Needy) ||
             pc.Is(CustomRoles.Lazy) ||
             pc.Is(CustomRoles.Loyal) ||
             pc.Is(CustomRoles.SuperStar) ||
             pc.Is(CustomRoles.CyberStar) ||
             pc.Is(CustomRoles.TaskManager) ||
-         //   pc.Is(CustomRoles.Cyber) ||
+            //   pc.Is(CustomRoles.Cyber) ||
             pc.Is(CustomRoles.Egoist) ||
             pc.Is(CustomRoles.DualPersonality) ||
             pc.Is(CustomRoles.MiniCrew)
@@ -819,20 +820,34 @@ public static class Utils
                 ProgressText.Append(ColorString(TextColor1, $"({Completed1}/{taskState1.AllTasksCount})"));
                 ProgressText.Append($" <color=#777777>-</color> <color=#00ffa5>{totalCompleted1}/{GameData.Instance.TotalTasks}</color>");
                 break;
-        /*    case CustomRoles.Cleanser: // BROKEN
-                var taskState15 = Main.PlayerStates?[playerId].GetTaskState();
-                Color TextColor15;
-                var TaskCompleteColor15 = Color.green;
-                var NonCompleteColor15 = Color.yellow;
-                var NormalColor15 = taskState15.IsTaskFinished ? TaskCompleteColor15 : NonCompleteColor15;
-                TextColor15 = comms ? Color.gray : NormalColor15;
-                string Completed15 = comms ? "?" : $"{taskState15.CompletedTasksCount}";
-                Color TextColor151;
-                if (Main.LighterNumOfUsed[playerId] < 1) TextColor151 = Color.red;
-                else TextColor151 = Color.white;
-                ProgressText.Append(ColorString(TextColor15, $"({Completed15}/{taskState15.AllTasksCount}"));
-                ProgressText.Append(ColorString(TextColor151, $" <color=#ffffff>-</color> {(Cleanser.CleanserUses[playerId], 1)}"));
-                break; */
+            /*    case CustomRoles.Cleanser: // BROKEN
+                    var taskState15 = Main.PlayerStates?[playerId].GetTaskState();
+                    Color TextColor15;
+                    var TaskCompleteColor15 = Color.green;
+                    var NonCompleteColor15 = Color.yellow;
+                    var NormalColor15 = taskState15.IsTaskFinished ? TaskCompleteColor15 : NonCompleteColor15;
+                    TextColor15 = comms ? Color.gray : NormalColor15;
+                    string Completed15 = comms ? "?" : $"{taskState15.CompletedTasksCount}";
+                    Color TextColor151;
+                    if (Main.LighterNumOfUsed[playerId] < 1) TextColor151 = Color.red;
+                    else TextColor151 = Color.white;
+                    ProgressText.Append(ColorString(TextColor15, $"({Completed15}/{taskState15.AllTasksCount}"));
+                    ProgressText.Append(ColorString(TextColor151, $" <color=#ffffff>-</color> {(Cleanser.CleanserUses[playerId], 1)}"));
+                    break; */
+            case CustomRoles.President:
+                var taskState16 = Main.PlayerStates?[playerId].GetTaskState();
+                Color TextColor16;
+                var TaskCompleteColor16 = Color.green;
+                var NonCompleteColor16 = Color.yellow;
+                var NormalColor16 = taskState16.IsTaskFinished ? TaskCompleteColor16 : NonCompleteColor16;
+                TextColor16 = comms ? Color.gray : NormalColor16;
+                string Completed16 = comms ? "?" : $"{taskState16.CompletedTasksCount}";
+                Color TextColor161;
+                if (President.CheckLimit[playerId] < 1) TextColor161 = Color.red;
+                else TextColor161 = Color.white;
+                ProgressText.Append(ColorString(TextColor16, $"({Completed16}/{taskState16.AllTasksCount})"));
+                ProgressText.Append(ColorString(TextColor161, $" <color=#ffffff>-</color> {Math.Round(President.SkillLimit.GetFloat() - President.CheckLimit[playerId], 1)}"));
+                break;
             case CustomRoles.Pirate:
                 ProgressText.Append(ColorString(GetRoleColor(CustomRoles.Pirate).ShadeColor(0.25f), $"({Pirate.NumWin}/{Pirate.SuccessfulDuelsToWin.GetInt()})"));
                 break;

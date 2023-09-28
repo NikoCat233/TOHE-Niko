@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TOHE.Modules;
 using TOHE.Roles.Crewmate;
 using TOHE.Roles.Impostor;
 using TOHE.Roles.Neutral;
@@ -18,13 +19,6 @@ class CheckForEndVotingPatch
     {
         if (!AmongUsClient.Instance.AmHost) return true;
         if (Medic.IsEnable) Medic.OnCheckMark();
-        //Meeting Skip with vote counting on keystroke (m + delete)
-        var shouldSkip = false;
-        if (Input.GetKeyDown(KeyCode.F6)) 
-        {
-            shouldSkip = true;
-        }
-        //
         var voteLog = Logger.Handler("Vote");
         try
         {
@@ -50,7 +44,7 @@ class CheckForEndVotingPatch
                     }
                 }
 
-//催眠师催眠
+                //催眠师催眠
 
                 if (pc.Is(CustomRoles.Dictator) && pva.DidVote && pc.PlayerId != pva.VotedFor && pva.VotedFor < 253 && !pc.Data.IsDead)
                 {
@@ -167,7 +161,7 @@ class CheckForEndVotingPatch
             }
             foreach (var ps in __instance.playerStates)
             {
-                if (shouldSkip) break; //Meeting Skip with vote counting on keystroke (m + delete)
+                if (ForceMeeting.shouldSkip) break;
 
                 //死んでいないプレイヤーが投票していない
                 if (!(Main.PlayerStates[ps.TargetPlayerId].IsDead || ps.DidVote)) return false;
@@ -840,6 +834,7 @@ class MeetingHudStartPatch
         GameStates.AlreadyDied |= !Utils.IsAllAlive;
         Main.AllPlayerControls.Do(x => ReportDeadBodyPatch.WaitReport[x.PlayerId].Clear());
         MeetingStates.MeetingCalled = true;
+        ForceMeeting.shouldSkip = false;
     }
     public static void Postfix(MeetingHud __instance)
     {
@@ -1206,13 +1201,6 @@ class MeetingHudUpdatePatch
 
     public static void Postfix(MeetingHud __instance)
     {
-        //Meeting Skip with vote counting on keystroke (m + delete)
-        if (AmongUsClient.Instance.AmHost && Input.GetKeyDown(KeyCode.F6))
-        {
-            __instance.CheckForEndVoting();
-        }
-        //
-
         if (AmongUsClient.Instance.AmHost && Input.GetMouseButtonUp(1) && Input.GetKey(KeyCode.LeftControl))
         {
             __instance.playerStates.DoIf(x => x.HighlightedFX.enabled, x =>
@@ -1262,6 +1250,7 @@ class MeetingHudUpdatePatch
             //销毁死亡玩家身上的技能按钮
             ClearShootButton(__instance);
 
+
         }
     }
 }
@@ -1290,6 +1279,7 @@ class MeetingHudOnDestroyPatch
 
             Main.LastVotedPlayerInfo = null;
             EAC.MeetingTimes = 0;
+            ForceMeeting.shouldSkip = false;
         }
     }
 }

@@ -316,6 +316,7 @@ internal class ChangeRoleSettings
             ChiefOfPolice.Init();
             MiniCrew.Init();
             Blackmailer.Init();
+            President.Init();
 
             CustomWinnerHolder.Reset();
             AntiBlackout.Reset();
@@ -884,6 +885,9 @@ internal class SelectRolesPatch
                     //    break;
                     case CustomRoles.Blackmailer:
                         Blackmailer.Add(pc.PlayerId);
+                        break;
+                    case CustomRoles.President:
+                        President.Add(pc.PlayerId); 
                         break;
                 }
                 foreach (var subRole in pc.GetCustomSubRoles())

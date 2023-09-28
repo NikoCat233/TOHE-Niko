@@ -483,6 +483,10 @@ public class TaskState
             {
                 Chameleon.UseLimit[player.PlayerId] += Chameleon.ChameleonAbilityUseGainWithEachTaskCompleted.GetFloat();
             }
+            if (player.Is(CustomRoles.President) && player.IsAlive())
+            {
+                President.CheckLimit[player.PlayerId] -= President.SkillGainPreTask.GetFloat();
+            }
 
             if (player.Is(CustomRoles.Ghoul) && (CompletedTasksCount + 1) >= AllTasksCount && player.IsAlive())
             _ = new LateTask(() =>

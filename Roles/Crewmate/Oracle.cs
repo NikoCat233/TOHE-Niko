@@ -23,7 +23,7 @@ public static class Oracle
 
     public static void SetupCustomOption()
     {
-        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Oracle);
+        SetupRoleOptions(Id, TabGroup.CrewmateRoles, CustomRoles.Oracle, canPublic: true);
         CheckLimitOpt = IntegerOptionItem.Create(Id + 10, "OracleSkillLimit", new(0, 10, 1), 1, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Oracle])
             .SetValueFormat(OptionFormat.Times);
         //    OracleCheckMode = BooleanOptionItem.Create(Id + 11, "AccurateCheckMode", false, TabGroup.CrewmateRoles, false).SetParent(CustomRoleSpawnChances[CustomRoles.Oracle]);

@@ -389,6 +389,7 @@ public class Main : BasePlugin
                 {CustomRoles.Swapper, "#66E666"},
                 {CustomRoles.ChiefOfPolice,"#f8cd46"},
                 {CustomRoles.MiniCrew, "#FFFFFF"},
+                {CustomRoles.President, "#5a840b"},
                 //第三陣営役職
                 {CustomRoles.Arsonist, "#ff6633"},
                 {CustomRoles.Agitater, "#F4A460"},
@@ -736,6 +737,7 @@ public enum CustomRoles
     Swapper,
     ChiefOfPolice,
     MiniCrew,
+    President,
 
     //Neutral
     Arsonist,

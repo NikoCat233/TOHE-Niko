@@ -3051,5 +3051,16 @@
   "BlackmailerSucceed": "玩家<b>{0}</b>不愿屈服于勒索者，壮烈牺牲！",
   "BlackmailerTarget": "不要继续说话了，否则你会被勒索致死！\n当前发言次数:{0}次",
   "BlackmailerShutUp": "你被勒索了，不要发言或发指令，否则\n勒索者会杀死你！\n最大发言次数:{0}次，超过立刻勒索暴毙！",
-  "BlackmailerTitle": "[ ★ 勒索违法 ★ ]"
+  "BlackmailerTitle": "[ ★ 勒索违法 ★ ]",
+  "President": "首席",
+  "PresidentInfo": "你有着市长都要羡慕的技能！",
+  "PresidentInfoLong": "(船员阵营):\n首席使用指令可以强制结束会议，技能发动时会提示所有人。根据房主设定，首席发动技能时可以计票或不计票\n指令示例: /skip /过 /sk",
+  "PresidentSkillLimit": "首席技能上限",
+  "EveryoneKnowPresident": "所有人知道首席是谁",
+  "PresidentcountVote": "首席的技能是否计票",
+  "PresidentSkillGainPreTask": "首席每完成一个任务获得的额外技能",
+  "PresidentDead": "你不能在死后发动技能",
+  "PresidentSkillMax": "技能使用达到上限，可尝试做任务获得技能次数！",
+  "PresidentSkip": "首席<b>{0}</b>强制结束了本次会议！",
+  "PresidentTitle": "[ ★ 首脑决策 ★ ]"
 }

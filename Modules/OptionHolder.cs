@@ -894,6 +894,7 @@ public static class Options
     public static OptionItem JudgeCanBeMadmate;
     public static OptionItem MarshallCanBeMadmate;
     public static OptionItem RetributionistCanBeMadmate;
+    public static OptionItem PresidentCanBeMadmate;
     public static OptionItem FarseerCanBeMadmate;
     public static OptionItem MadSnitchTasks;
     public static OptionItem FlashmanSpeed;
@@ -1538,6 +1539,7 @@ public static class Options
             .SetColor(new Color32(140, 255, 255, byte.MaxValue));
         CopyCat.SetupCustomOption();
         SetupRoleOptions(9100, TabGroup.CrewmateRoles, CustomRoles.Dictator, canPublic: true);
+        President.SetupCustomOption();
         SetupRoleOptions(9200, TabGroup.CrewmateRoles, CustomRoles.Guardian);
         GuardianTasks = OverrideTasksData.Create(9210, TabGroup.CrewmateRoles, CustomRoles.Guardian);
         Judge.SetupCustomOption();
@@ -2093,6 +2095,8 @@ public static class Options
             .SetValueFormat(OptionFormat.Pieces);
         JudgeCanBeMadmate = BooleanOptionItem.Create(15820, "JudgeCanBeMadmate", false, TabGroup.Addons, false)
             .SetParent(CustomRoleSpawnChances[CustomRoles.Madmate]);
+        PresidentCanBeMadmate = BooleanOptionItem.Create(15822, "PresidentCanBeMadmate", false, TabGroup.Addons, false)
+            .SetParent(CustomRoleSpawnChances[CustomRoles.Madmate]);
         LastImpostor.SetupCustomOption();
         SetupAdtRoleOptions(16070, CustomRoles.Clumsy, canSetNum: true, tab: TabGroup.Addons);
         ChanceToMiss = IntegerOptionItem.Create(16085, "ChanceToMiss", new(0, 100, 5), 50, TabGroup.Addons, false)
@@ -2172,7 +2176,7 @@ public static class Options
         SetupRoleOptions(16900, TabGroup.OtherRoles, CustomRoles.OverKiller);
         Disperser.SetupCustomOption();
         Hangman.SetupCustomOption();
-        Blackmailer.SetupCustomOption();
+        //Blackmailer.SetupCustomOption();
 
         // 船员
         TextOptionItem.Create(100019, "OtherRoles.CrewmateRoles", TabGroup.OtherRoles)
