@@ -7,8 +7,9 @@
 
 <p align="right">
   
-> ### Regarding this mod
-> TOHE-Niko is a fork of TOHRE. Niko only wants to make mod available for more people.
+> ### Regarding this mod> TOHE-Niko is a fork of TOHRE. Niko only wants to make mod available for more people.
+由于树懒修改了版本协议，原版能直接兼容匹配模组，所以tohe-niko没有继续开发的必要。
+tohe-niko于10月1日停止开发
 > This mod is not affiliated with Among Us or Innersloth LLC, and the content contained therein is not endorsed or otherwise sponsored by Innersloth LLC. Portions of the materials contained herein are the property of Innersloth LLC.
 <br>
 
